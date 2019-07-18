@@ -1,1 +1,0 @@
-{"ast":null,"code":"import React from \"react\";\nexport default (function () {\n  return React.createElement(\"header\", null, React.createElement(\"h1\", null, \"Static Next.js Example on Now 2.0\"));\n});","map":null,"metadata":{},"sourceType":"module"}
