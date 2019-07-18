@@ -2,6 +2,7 @@ import Link from "next/link";
 import Head from 'next/head'
 import Header from "../components/header";
 import Video from "../components/video";
+import { Container } from "@headspace/web-styles/dist/components/container";
 
 
 // class CustomDocument extends Document {
@@ -62,6 +63,16 @@ export default () => {
         `}</style>
       </Head>
       <Video />
+      <Container style={{
+        "z-index": "100",
+        position: "absolute",
+        top: "0px",
+        left: "0px",
+        height: "10%",
+        width: "100%"
+      }}>
+        TEST TEST TEST
+      </Container>
       <Header></Header>
     </main>
   )

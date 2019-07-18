@@ -53,7 +53,12 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/componen
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var videoStyle = {
-    width: '100%',
+    "z-index": "0",
+    position: "absolute",
+    top: "0px",
+    left: "0px",
+    height: "100%",
+    width: "100%",
     "object-fit": "contain"
   };
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_1__["Container"], {
@@ -65,13 +70,13 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/componen
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 11
+      lineNumber: 16
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_headspace_web_styles_dist_components_col__WEBPACK_IMPORTED_MODULE_2__["Col"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 24
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
@@ -80,7 +85,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/componen
     autoPlay: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 25
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
@@ -88,7 +93,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/componen
     type: "video/mp4",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 26
     },
     __self: this
   }), "Your browser does not support the video tag.")));
@@ -14706,7 +14711,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/header */ "./components/header.js");
 /* harmony import */ var _components_video__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/video */ "./components/video.js");
+/* harmony import */ var _headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @headspace/web-styles/dist/components/container */ "./node_modules/@headspace/web-styles/dist/components/container.js");
+/* harmony import */ var _headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5__);
 var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/index.js";
+
 
 
 
@@ -14753,13 +14761,13 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     style: mainStyles,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 49
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 50
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14768,7 +14776,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 51
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14777,7 +14785,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 52
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14786,7 +14794,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 53
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14795,7 +14803,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 54
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14803,7 +14811,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     content: "image/jpeg",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 55
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14812,7 +14820,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 56
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14821,7 +14829,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 57
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14829,25 +14837,39 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     content: "A shiny red apple with a bite taken out",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 58
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("style", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 59
     },
     __self: this
   }, "\n          body {\n            margin: 0px;\n          }\n        ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_video__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 65
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_header__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5__["Container"], {
+    style: {
+      "z-index": "100",
+      position: "absolute",
+      top: "0px",
+      left: "0px",
+      height: "10%",
+      width: "100%"
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 66
+    },
+    __self: this
+  }, "TEST TEST TEST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_header__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 76
     },
     __self: this
   }));
