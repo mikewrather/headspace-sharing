@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "sharing",
+    "name": "Headspace Now",
     "build": {
         "src": "package.json", 
         "use": "@now/static-build",
