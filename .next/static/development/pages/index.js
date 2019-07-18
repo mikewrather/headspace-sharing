@@ -42,15 +42,9 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/componen
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @headspace/web-styles/dist/components/container */ "./node_modules/@headspace/web-styles/dist/components/container.js");
-/* harmony import */ var _headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _headspace_web_styles_dist_components_col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @headspace/web-styles/dist/components/col */ "./node_modules/@headspace/web-styles/dist/components/col.js");
-/* harmony import */ var _headspace_web_styles_dist_components_col__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_headspace_web_styles_dist_components_col__WEBPACK_IMPORTED_MODULE_2__);
 var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/components/video.js";
 
 // new component syntax
-
-
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var videoStyle = {
     "z-index": "0",
@@ -61,7 +55,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/componen
     width: "100%",
     "object-fit": "contain"
   };
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_1__["Container"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       padding: "0px",
       margin: "0px",
@@ -70,13 +64,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/componen
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_headspace_web_styles_dist_components_col__WEBPACK_IMPORTED_MODULE_2__["Col"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 15
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
@@ -85,7 +73,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/componen
     autoPlay: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 24
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
@@ -93,10 +81,10 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/componen
     type: "video/mp4",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 25
     },
     __self: this
-  }), "Your browser does not support the video tag.")));
+  }), "Your browser does not support the video tag."));
 });
 
 /***/ }),
@@ -878,2978 +866,6 @@ module.exports = _interopRequireWildcard;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/glamor/lib/CSSPropertyOperations/CSSProperty.js":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@headspace/glamor/lib/CSSPropertyOperations/CSSProperty.js ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule CSSProperty
- */
-
-/**
- * CSS properties which accept numbers but are not in units of "px".
- */
-
-var isUnitlessNumber = {
-  animationIterationCount: true,
-  borderImageOutset: true,
-  borderImageSlice: true,
-  borderImageWidth: true,
-  boxFlex: true,
-  boxFlexGroup: true,
-  boxOrdinalGroup: true,
-  columnCount: true,
-  flex: true,
-  flexGrow: true,
-  flexPositive: true,
-  flexShrink: true,
-  flexNegative: true,
-  flexOrder: true,
-  gridRow: true,
-  gridRowStart: true,
-  gridRowEnd: true,
-  gridColumn: true,
-  gridColumnStart: true,
-  gridColumnEnd: true,
-  fontWeight: true,
-  lineClamp: true,
-  lineHeight: true,
-  opacity: true,
-  order: true,
-  orphans: true,
-  tabSize: true,
-  widows: true,
-  zIndex: true,
-  zoom: true,
-
-  // SVG-related properties
-  fillOpacity: true,
-  floodOpacity: true,
-  stopOpacity: true,
-  strokeDasharray: true,
-  strokeDashoffset: true,
-  strokeMiterlimit: true,
-  strokeOpacity: true,
-  strokeWidth: true
-
-  /**
-   * @param {string} prefix vendor-specific prefix, eg: Webkit
-   * @param {string} key style name, eg: transitionDuration
-   * @return {string} style name prefixed with `prefix`, properly camelCased, eg:
-   * WebkitTransitionDuration
-   */
-};function prefixKey(prefix, key) {
-  return prefix + key.charAt(0).toUpperCase() + key.substring(1);
-}
-
-/**
- * Support style names that may come passed in prefixed by adding permutations
- * of vendor prefixes.
- */
-var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
-
-// Using Object.keys here, or else the vanilla for-in loop makes IE8 go into an
-// infinite loop, because it iterates over the newly added props too.
-Object.keys(isUnitlessNumber).forEach(function (prop) {
-  prefixes.forEach(function (prefix) {
-    isUnitlessNumber[prefixKey(prefix, prop)] = isUnitlessNumber[prop];
-  });
-});
-
-/**
- * Most style properties can be unset by doing .style[prop] = '' but IE8
- * doesn't like doing that with shorthand properties so for the properties that
- * IE8 breaks on, which are listed here, we instead unset each of the
- * individual properties. See http://bugs.jquery.com/ticket/12385.
- * The 4-value 'clock' properties like margin, padding, border-width seem to
- * behave without any problems. Curiously, list-style works too without any
- * special prodding.
- */
-var shorthandPropertyExpansions = {
-  background: {
-    backgroundAttachment: true,
-    backgroundColor: true,
-    backgroundImage: true,
-    backgroundPositionX: true,
-    backgroundPositionY: true,
-    backgroundRepeat: true
-  },
-  backgroundPosition: {
-    backgroundPositionX: true,
-    backgroundPositionY: true
-  },
-  border: {
-    borderWidth: true,
-    borderStyle: true,
-    borderColor: true
-  },
-  borderBottom: {
-    borderBottomWidth: true,
-    borderBottomStyle: true,
-    borderBottomColor: true
-  },
-  borderLeft: {
-    borderLeftWidth: true,
-    borderLeftStyle: true,
-    borderLeftColor: true
-  },
-  borderRight: {
-    borderRightWidth: true,
-    borderRightStyle: true,
-    borderRightColor: true
-  },
-  borderTop: {
-    borderTopWidth: true,
-    borderTopStyle: true,
-    borderTopColor: true
-  },
-  font: {
-    fontStyle: true,
-    fontVariant: true,
-    fontWeight: true,
-    fontSize: true,
-    lineHeight: true,
-    fontFamily: true
-  },
-  outline: {
-    outlineWidth: true,
-    outlineStyle: true,
-    outlineColor: true
-  }
-};
-
-var CSSProperty = {
-  isUnitlessNumber: isUnitlessNumber,
-  shorthandPropertyExpansions: shorthandPropertyExpansions
-};
-
-exports.default = CSSProperty;
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/glamor/lib/CSSPropertyOperations/dangerousStyleValue.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@headspace/glamor/lib/CSSPropertyOperations/dangerousStyleValue.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _CSSProperty = __webpack_require__(/*! ./CSSProperty */ "./node_modules/@headspace/glamor/lib/CSSPropertyOperations/CSSProperty.js");
-
-var _CSSProperty2 = _interopRequireDefault(_CSSProperty);
-
-var _warning = __webpack_require__(/*! fbjs/lib/warning */ "./node_modules/fbjs/lib/warning.js");
-
-var _warning2 = _interopRequireDefault(_warning);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule dangerousStyleValue
- */
-
-var isUnitlessNumber = _CSSProperty2.default.isUnitlessNumber;
-var styleWarnings = {};
-
-/**
- * Convert a value into the proper css writable value. The style name `name`
- * should be logical (no hyphens), as specified
- * in `CSSProperty.isUnitlessNumber`.
- *
- * @param {string} name CSS property name such as `topMargin`.
- * @param {*} value CSS property value such as `10px`.
- * @param {ReactDOMComponent} component
- * @return {string} Normalized style value with dimensions applied.
- */
-function dangerousStyleValue(name, value, component) {
-  // Note that we've removed escapeTextForBrowser() calls here since the
-  // whole string will be escaped when the attribute is injected into
-  // the markup. If you provide unsafe user data here they can inject
-  // arbitrary CSS which may be problematic (I couldn't repro this):
-  // https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
-  // http://www.thespanner.co.uk/2007/11/26/ultimate-xss-css-injection/
-  // This is not an XSS hole but instead a potential CSS injection issue
-  // which has lead to a greater discussion about how we're going to
-  // trust URLs moving forward. See #2115901
-
-  var isEmpty = value == null || typeof value === 'boolean' || value === '';
-  if (isEmpty) {
-    return '';
-  }
-
-  var isNonNumeric = isNaN(value);
-  if (isNonNumeric || value === 0 || isUnitlessNumber.hasOwnProperty(name) && isUnitlessNumber[name]) {
-    return '' + value; // cast to string
-  }
-
-  if (typeof value === 'string') {
-    if (true) {
-      // Allow '0' to pass through without warning. 0 is already special and
-      // doesn't require units, so we don't need to warn about it.
-      if (component && value !== '0') {
-        var owner = component._currentElement._owner;
-        var ownerName = owner ? owner.getName() : null;
-        if (ownerName && !styleWarnings[ownerName]) {
-          styleWarnings[ownerName] = {};
-        }
-        var warned = false;
-        if (ownerName) {
-          var warnings = styleWarnings[ownerName];
-          warned = warnings[name];
-          if (!warned) {
-            warnings[name] = true;
-          }
-        }
-        if (!warned) {
-           true ? (0, _warning2.default)(false, 'a `%s` tag (owner: `%s`) was passed a numeric string value ' + 'for CSS property `%s` (value: `%s`) which will be treated ' + 'as a unitless number in a future version of React.', component._currentElement.type, ownerName || 'unknown', name, value) : undefined;
-        }
-      }
-    }
-    value = value.trim();
-  }
-  return value + 'px';
-}
-
-exports.default = dangerousStyleValue;
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/glamor/lib/CSSPropertyOperations/index.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/@headspace/glamor/lib/CSSPropertyOperations/index.js ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.processStyleName = undefined;
-exports.createMarkupForStyles = createMarkupForStyles;
-
-var _camelizeStyleName = __webpack_require__(/*! fbjs/lib/camelizeStyleName */ "./node_modules/fbjs/lib/camelizeStyleName.js");
-
-var _camelizeStyleName2 = _interopRequireDefault(_camelizeStyleName);
-
-var _dangerousStyleValue = __webpack_require__(/*! ./dangerousStyleValue */ "./node_modules/@headspace/glamor/lib/CSSPropertyOperations/dangerousStyleValue.js");
-
-var _dangerousStyleValue2 = _interopRequireDefault(_dangerousStyleValue);
-
-var _hyphenateStyleName = __webpack_require__(/*! fbjs/lib/hyphenateStyleName */ "./node_modules/fbjs/lib/hyphenateStyleName.js");
-
-var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
-
-var _memoizeStringOnly = __webpack_require__(/*! fbjs/lib/memoizeStringOnly */ "./node_modules/fbjs/lib/memoizeStringOnly.js");
-
-var _memoizeStringOnly2 = _interopRequireDefault(_memoizeStringOnly);
-
-var _warning = __webpack_require__(/*! fbjs/lib/warning */ "./node_modules/fbjs/lib/warning.js");
-
-var _warning2 = _interopRequireDefault(_warning);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var processStyleName = exports.processStyleName = (0, _memoizeStringOnly2.default)(_hyphenateStyleName2.default); /**
-                                                                                                                   * Copyright 2013-present, Facebook, Inc.
-                                                                                                                   * All rights reserved.
-                                                                                                                   *
-                                                                                                                   * This source code is licensed under the BSD-style license found in the
-                                                                                                                   * LICENSE file in the root directory of this source tree. An additional grant
-                                                                                                                   * of patent rights can be found in the PATENTS file in the same directory.
-                                                                                                                   *
-                                                                                                                   * @providesModule CSSPropertyOperations
-                                                                                                                   */
-
-if (true) {
-  // 'msTransform' is correct, but the other prefixes should be capitalized
-  var badVendoredStyleNamePattern = /^(?:webkit|moz|o)[A-Z]/;
-
-  // style values shouldn't contain a semicolon
-  var badStyleValueWithSemicolonPattern = /;\s*$/;
-
-  var warnedStyleNames = {};
-  var warnedStyleValues = {};
-  var warnedForNaNValue = false;
-
-  var warnHyphenatedStyleName = function warnHyphenatedStyleName(name, owner) {
-    if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
-      return;
-    }
-
-    warnedStyleNames[name] = true;
-     true ? (0, _warning2.default)(false, 'Unsupported style property %s. Did you mean %s?%s', name, (0, _camelizeStyleName2.default)(name), checkRenderMessage(owner)) : undefined;
-  };
-
-  var warnBadVendoredStyleName = function warnBadVendoredStyleName(name, owner) {
-    if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
-      return;
-    }
-
-    warnedStyleNames[name] = true;
-     true ? (0, _warning2.default)(false, 'Unsupported vendor-prefixed style property %s. Did you mean %s?%s', name, name.charAt(0).toUpperCase() + name.slice(1), checkRenderMessage(owner)) : undefined;
-  };
-
-  var warnStyleValueWithSemicolon = function warnStyleValueWithSemicolon(name, value, owner) {
-    if (warnedStyleValues.hasOwnProperty(value) && warnedStyleValues[value]) {
-      return;
-    }
-
-    warnedStyleValues[value] = true;
-     true ? (0, _warning2.default)(false, 'Style property values shouldn\'t contain a semicolon.%s ' + 'Try "%s: %s" instead.', checkRenderMessage(owner), name, value.replace(badStyleValueWithSemicolonPattern, '')) : undefined;
-  };
-
-  var warnStyleValueIsNaN = function warnStyleValueIsNaN(name, value, owner) {
-    if (warnedForNaNValue) {
-      return;
-    }
-
-    warnedForNaNValue = true;
-     true ? (0, _warning2.default)(false, '`NaN` is an invalid value for the `%s` css style property.%s', name, checkRenderMessage(owner)) : undefined;
-  };
-
-  var checkRenderMessage = function checkRenderMessage(owner) {
-    if (owner) {
-      var name = owner.getName();
-      if (name) {
-        return ' Check the render method of `' + name + '`.';
-      }
-    }
-    return '';
-  };
-
-  /**
-   * @param {string} name
-   * @param {*} value
-   * @param {ReactDOMComponent} component
-   */
-  var warnValidStyle = function warnValidStyle(name, value, component) {
-    //eslint-disable-line no-var
-    var owner = void 0;
-    if (component) {
-      owner = component._currentElement._owner;
-    }
-    if (name.indexOf('-') > -1) {
-      warnHyphenatedStyleName(name, owner);
-    } else if (badVendoredStyleNamePattern.test(name)) {
-      warnBadVendoredStyleName(name, owner);
-    } else if (badStyleValueWithSemicolonPattern.test(value)) {
-      warnStyleValueWithSemicolon(name, value, owner);
-    }
-
-    if (typeof value === 'number' && isNaN(value)) {
-      warnStyleValueIsNaN(name, value, owner);
-    }
-  };
-}
-
-/**
-   * Serializes a mapping of style properties for use as inline styles:
-   *
-   *   > createMarkupForStyles({width: '200px', height: 0})
-   *   "width:200px;height:0;"
-   *
-   * Undefined values are ignored so that declarative programming is easier.
-   * The result should be HTML-escaped before insertion into the DOM.
-   *
-   * @param {object} styles
-   * @param {ReactDOMComponent} component
-   * @return {?string}
-   */
-
-function createMarkupForStyles(styles, component) {
-  var serialized = '';
-  for (var styleName in styles) {
-    var isCustomProp = styleName.indexOf('--') === 0;
-    if (!styles.hasOwnProperty(styleName)) {
-      continue;
-    }
-    if (styleName === 'label') {
-      continue;
-    }
-    var styleValue = styles[styleName];
-    if ( true && !isCustomProp) {
-      warnValidStyle(styleName, styleValue, component);
-    }
-    if (styleValue != null) {
-      if (isCustomProp) {
-        serialized += styleName + ':' + styleValue + ';';
-      } else {
-        serialized += processStyleName(styleName) + ':';
-        serialized += (0, _dangerousStyleValue2.default)(styleName, styleValue, component) + ';';
-      }
-    }
-  }
-  return serialized || null;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/glamor/lib/clean.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/@headspace/glamor/lib/clean.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-exports.default = clean;
-// Returns true for null, false, undefined and {}
-function isFalsy(value) {
-  return value === null || value === undefined || value === false || (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && Object.keys(value).length === 0;
-}
-
-function cleanObject(object) {
-  if (isFalsy(object)) return null;
-  if ((typeof object === 'undefined' ? 'undefined' : _typeof(object)) !== 'object') return object;
-
-  var acc = {},
-      keys = Object.keys(object),
-      hasFalsy = false;
-  for (var i = 0; i < keys.length; i++) {
-    var value = object[keys[i]];
-    var filteredValue = clean(value);
-    if (filteredValue === null || filteredValue !== value) {
-      hasFalsy = true;
-    }
-    if (filteredValue !== null) {
-      acc[keys[i]] = filteredValue;
-    }
-  }
-  return Object.keys(acc).length === 0 ? null : hasFalsy ? acc : object;
-}
-
-function cleanArray(rules) {
-  var hasFalsy = false;
-  var filtered = [];
-  rules.forEach(function (rule) {
-    var filteredRule = clean(rule);
-    if (filteredRule === null || filteredRule !== rule) {
-      hasFalsy = true;
-    }
-    if (filteredRule !== null) {
-      filtered.push(filteredRule);
-    }
-  });
-  return filtered.length == 0 ? null : hasFalsy ? filtered : rules;
-}
-
-// Takes style array or object provided by user and clears all the falsy data 
-// If there is no styles left after filtration returns null
-function clean(input) {
-  return Array.isArray(input) ? cleanArray(input) : cleanObject(input);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/glamor/lib/hash.js":
-/*!****************************************************!*\
-  !*** ./node_modules/@headspace/glamor/lib/hash.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = doHash;
-// murmurhash2 via https://gist.github.com/raycmorgan/588423
-
-function doHash(str, seed) {
-  var m = 0x5bd1e995;
-  var r = 24;
-  var h = seed ^ str.length;
-  var length = str.length;
-  var currentIndex = 0;
-
-  while (length >= 4) {
-    var k = UInt32(str, currentIndex);
-
-    k = Umul32(k, m);
-    k ^= k >>> r;
-    k = Umul32(k, m);
-
-    h = Umul32(h, m);
-    h ^= k;
-
-    currentIndex += 4;
-    length -= 4;
-  }
-
-  switch (length) {
-    case 3:
-      h ^= UInt16(str, currentIndex);
-      h ^= str.charCodeAt(currentIndex + 2) << 16;
-      h = Umul32(h, m);
-      break;
-
-    case 2:
-      h ^= UInt16(str, currentIndex);
-      h = Umul32(h, m);
-      break;
-
-    case 1:
-      h ^= str.charCodeAt(currentIndex);
-      h = Umul32(h, m);
-      break;
-  }
-
-  h ^= h >>> 13;
-  h = Umul32(h, m);
-  h ^= h >>> 15;
-
-  return h >>> 0;
-}
-
-function UInt32(str, pos) {
-  return str.charCodeAt(pos++) + (str.charCodeAt(pos++) << 8) + (str.charCodeAt(pos++) << 16) + (str.charCodeAt(pos) << 24);
-}
-
-function UInt16(str, pos) {
-  return str.charCodeAt(pos++) + (str.charCodeAt(pos++) << 8);
-}
-
-function Umul32(n, m) {
-  n = n | 0;
-  m = m | 0;
-  var nlo = n & 0xffff;
-  var nhi = n >>> 16;
-  var res = nlo * m + ((nhi * m & 0xffff) << 16) | 0;
-  return res;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/glamor/lib/index.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/@headspace/glamor/lib/index.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.compose = exports.merge = exports.$ = exports.style = exports.presets = exports.keyframes = exports.fontFace = exports.insertGlobal = exports.insertRule = exports.plugins = exports.styleSheet = undefined;
-exports.speedy = speedy;
-exports.simulations = simulations;
-exports.simulate = simulate;
-exports.cssLabels = cssLabels;
-exports.isLikeRule = isLikeRule;
-exports.idFor = idFor;
-exports.css = css;
-exports.rehydrate = rehydrate;
-exports.flush = flush;
-exports.select = select;
-exports.parent = parent;
-exports.media = media;
-exports.pseudo = pseudo;
-exports.active = active;
-exports.any = any;
-exports.checked = checked;
-exports.disabled = disabled;
-exports.empty = empty;
-exports.enabled = enabled;
-exports._default = _default;
-exports.first = first;
-exports.firstChild = firstChild;
-exports.firstOfType = firstOfType;
-exports.fullscreen = fullscreen;
-exports.focus = focus;
-exports.hover = hover;
-exports.indeterminate = indeterminate;
-exports.inRange = inRange;
-exports.invalid = invalid;
-exports.lastChild = lastChild;
-exports.lastOfType = lastOfType;
-exports.left = left;
-exports.link = link;
-exports.onlyChild = onlyChild;
-exports.onlyOfType = onlyOfType;
-exports.optional = optional;
-exports.outOfRange = outOfRange;
-exports.readOnly = readOnly;
-exports.readWrite = readWrite;
-exports.required = required;
-exports.right = right;
-exports.root = root;
-exports.scope = scope;
-exports.target = target;
-exports.valid = valid;
-exports.visited = visited;
-exports.dir = dir;
-exports.lang = lang;
-exports.not = not;
-exports.nthChild = nthChild;
-exports.nthLastChild = nthLastChild;
-exports.nthLastOfType = nthLastOfType;
-exports.nthOfType = nthOfType;
-exports.after = after;
-exports.before = before;
-exports.firstLetter = firstLetter;
-exports.firstLine = firstLine;
-exports.selection = selection;
-exports.backdrop = backdrop;
-exports.placeholder = placeholder;
-exports.cssFor = cssFor;
-exports.attribsFor = attribsFor;
-
-var _objectAssign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-var _sheet = __webpack_require__(/*! ./sheet.js */ "./node_modules/@headspace/glamor/lib/sheet.js");
-
-var _CSSPropertyOperations = __webpack_require__(/*! ./CSSPropertyOperations */ "./node_modules/@headspace/glamor/lib/CSSPropertyOperations/index.js");
-
-var _clean = __webpack_require__(/*! ./clean.js */ "./node_modules/@headspace/glamor/lib/clean.js");
-
-var _clean2 = _interopRequireDefault(_clean);
-
-var _plugins = __webpack_require__(/*! ./plugins */ "./node_modules/@headspace/glamor/lib/plugins.js");
-
-var _hash = __webpack_require__(/*! ./hash */ "./node_modules/@headspace/glamor/lib/hash.js");
-
-var _hash2 = _interopRequireDefault(_hash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-/* stylesheet */
-
-
-var styleSheet = exports.styleSheet = new _sheet.StyleSheet();
-// an isomorphic StyleSheet shim. hides all the nitty gritty.
-
-// /**************** LIFTOFF IN 3... 2... 1... ****************/
-styleSheet.inject(); //eslint-disable-line indent
-// /****************      TO THE MOOOOOOON     ****************/
-
-// convenience function to toggle speedy
-function speedy(bool) {
-  return styleSheet.speedy(bool);
-}
-
-// plugins
-// we include these by default
-var plugins = exports.plugins = styleSheet.plugins = new _plugins.PluginSet([_plugins.prefixes, _plugins.contentWrap, _plugins.fallbacks]);
-plugins.media = new _plugins.PluginSet(); // neat! media, font-face, keyframes
-plugins.fontFace = new _plugins.PluginSet();
-plugins.keyframes = new _plugins.PluginSet([_plugins.prefixes, _plugins.fallbacks]);
-
-// define some constants
-
-var isDev =  true || false;
-var isTest = "development" === 'test';
-var isBrowser = "object" !== 'undefined';
-
-/**** simulations  ****/
-
-// a flag to enable simulation meta tags on dom nodes
-// defaults to true in dev mode. recommend *not* to
-// toggle often.
-var canSimulate = isDev;
-
-// we use these flags for issuing warnings when simulate is called
-// in prod / in incorrect order
-var warned1 = false,
-    warned2 = false;
-
-// toggles simulation activity. shouldn't be needed in most cases
-function simulations() {
-  var bool = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
-  canSimulate = !!bool;
-}
-
-// use this on dom nodes to 'simulate' pseudoclasses
-// <div {...hover({ color: 'red' })} {...simulate('hover', 'visited')}>...</div>
-// you can even send in some weird ones, as long as it's in simple format
-// and matches an existing rule on the element
-// eg simulate('nthChild2', ':hover:active') etc
-function simulate() {
-  for (var _len = arguments.length, pseudos = Array(_len), _key = 0; _key < _len; _key++) {
-    pseudos[_key] = arguments[_key];
-  }
-
-  pseudos = (0, _clean2.default)(pseudos);
-  if (!pseudos) return {};
-  if (!canSimulate) {
-    if (!warned1) {
-      console.warn('can\'t simulate without once calling simulations(true)'); //eslint-disable-line no-console
-      warned1 = true;
-    }
-    if (!isDev && !isTest && !warned2) {
-      console.warn('don\'t use simulation outside dev'); //eslint-disable-line no-console
-      warned2 = true;
-    }
-    return {};
-  }
-  return pseudos.reduce(function (o, p) {
-    return o['data-simulate-' + simple(p)] = '', o;
-  }, {});
-}
-
-/**** labels ****/
-// toggle for debug labels.
-// *shouldn't* have to mess with this manually
-var hasLabels = isDev;
-
-function cssLabels(bool) {
-  hasLabels = !!bool;
-}
-
-// takes a string, converts to lowercase, strips out nonalphanumeric.
-function simple(str) {
-  var char = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-  return str.toLowerCase().replace(/[^a-z0-9]/g, char);
-}
-
-// hashes a string to something 'unique'
-// we use this to generate ids for styles
-
-
-function hashify(obj) {
-  var str = JSON.stringify(obj);
-  var toRet = (0, _hash2.default)(str).toString(36);
-  if (obj.label && obj.label.length > 0 && isDev) {
-    return simple(obj.label.join('.'), '-') + '-' + toRet;
-  }
-  return toRet;
-}
-
-// of shape { 'data-css-<id>': '' }
-function isLikeRule(rule) {
-  var keys = Object.keys(rule).filter(function (x) {
-    return x !== 'toString';
-  });
-  if (keys.length !== 1) {
-    return false;
-  }
-  return !!/data\-css\-([a-zA-Z0-9\-_]+)/.exec(keys[0]);
-}
-
-// extracts id from a { 'data-css-<id>': ''} like object
-function idFor(rule) {
-  var keys = Object.keys(rule).filter(function (x) {
-    return x !== 'toString';
-  });
-  if (keys.length !== 1) throw new Error('not a rule');
-  var regex = /data\-css\-([a-zA-Z0-9\-_]+)/;
-  var match = regex.exec(keys[0]);
-  if (!match) throw new Error('not a rule');
-  return match[1];
-}
-
-// from https://github.com/j2css/j2c/blob/5d381c2d721d04b54fabe6a165d587247c3087cb/src/helpers.js#L28-L61
-
-// "Tokenizes" the selectors into parts relevant for the next function.
-// Strings and comments are matched, but ignored afterwards.
-// This is not a full tokenizers. It only recognizes comas, parentheses,
-// strings and comments.
-// regexp generated by scripts/regexps.js then trimmed by hand
-var selectorTokenizer = /[(),]|"(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\//g;
-
-/**
- * This will split a coma-separated selector list into individual selectors,
- * ignoring comas in strings, comments and in :pseudo-selectors(parameter, lists).
- *
- * @param {string} selector
- * @return {string[]}
- */
-
-function splitSelector(selector) {
-  if (selector.indexOf(',') === -1) {
-    return [selector];
-  }
-
-  var indices = [],
-      res = [],
-      inParen = 0,
-      o;
-  /*eslint-disable no-cond-assign*/
-  while (o = selectorTokenizer.exec(selector)) {
-    /*eslint-enable no-cond-assign*/
-    switch (o[0]) {
-      case '(':
-        inParen++;break;
-      case ')':
-        inParen--;break;
-      case ',':
-        if (inParen) break;indices.push(o.index);
-    }
-  }
-  for (o = indices.length; o--;) {
-    res.unshift(selector.slice(indices[o] + 1));
-    selector = selector.slice(0, indices[o]);
-  }
-  res.unshift(selector);
-  return res;
-}
-
-function selector(id, path) {
-  if (!id) {
-    return path.replace(/\&/g, '');
-  }
-  if (!path) return '.css-' + id + ',[data-css-' + id + ']';
-
-  var x = splitSelector(path).map(function (x) {
-    return x.indexOf('&') >= 0 ? [x.replace(/\&/mg, '.css-' + id), x.replace(/\&/mg, '[data-css-' + id + ']')].join(',') // todo - make sure each sub selector has an &
-    : '.css-' + id + x + ',[data-css-' + id + ']' + x;
-  }).join(',');
-
-  if (canSimulate && /^\&\:/.exec(path) && !/\s/.exec(path)) {
-    x += ',.css-' + id + '[data-simulate-' + simple(path) + '],[data-css-' + id + '][data-simulate-' + simple(path) + ']';
-  }
-  return x;
-}
-
-// end https://github.com/j2css/j2c/blob/5d381c2d721d04b54fabe6a165d587247c3087cb/src/helpers.js#L28-L61
-
-
-function toCSS(_ref) {
-  var selector = _ref.selector,
-      style = _ref.style;
-
-  var result = plugins.transform({ selector: selector, style: style });
-  return result.selector + '{' + (0, _CSSPropertyOperations.createMarkupForStyles)(result.style) + '}';
-}
-
-function deconstruct(style) {
-  // we can be sure it's not infinitely nested here
-  var plain = void 0,
-      selects = void 0,
-      medias = void 0,
-      supports = void 0;
-  Object.keys(style).forEach(function (key) {
-    if (key.indexOf('&') >= 0) {
-      selects = selects || {};
-      selects[key] = style[key];
-    } else if (key.indexOf('@media') === 0) {
-      medias = medias || {};
-      medias[key] = deconstruct(style[key]);
-    } else if (key.indexOf('@supports') === 0) {
-      supports = supports || {};
-      supports[key] = deconstruct(style[key]);
-    } else if (key === 'label') {
-      if (style.label.length > 0) {
-        plain = plain || {};
-        plain.label = hasLabels ? style.label.join('.') : '';
-      }
-    } else {
-      plain = plain || {};
-      plain[key] = style[key];
-    }
-  });
-  return { plain: plain, selects: selects, medias: medias, supports: supports };
-}
-
-function deconstructedStyleToCSS(id, style) {
-  var css = [];
-
-  // plugins here
-  var plain = style.plain,
-      selects = style.selects,
-      medias = style.medias,
-      supports = style.supports;
-
-  if (plain) {
-    css.push(toCSS({ style: plain, selector: selector(id) }));
-  }
-  if (selects) {
-    Object.keys(selects).forEach(function (key) {
-      return css.push(toCSS({ style: selects[key], selector: selector(id, key) }));
-    });
-  }
-  if (medias) {
-    Object.keys(medias).forEach(function (key) {
-      return css.push(key + '{' + deconstructedStyleToCSS(id, medias[key]).join('') + '}');
-    });
-  }
-  if (supports) {
-    Object.keys(supports).forEach(function (key) {
-      return css.push(key + '{' + deconstructedStyleToCSS(id, supports[key]).join('') + '}');
-    });
-  }
-  return css;
-}
-
-// this cache to track which rules have
-// been inserted into the stylesheet
-var inserted = styleSheet.inserted = {};
-
-// and helpers to insert rules into said styleSheet
-function insert(spec) {
-  if (!inserted[spec.id]) {
-    inserted[spec.id] = true;
-    var deconstructed = deconstruct(spec.style);
-    var rules = deconstructedStyleToCSS(spec.id, deconstructed);
-    inserted[spec.id] = isBrowser ? true : rules;
-    rules.forEach(function (cssRule) {
-      return styleSheet.insert(cssRule);
-    });
-  }
-}
-
-// a simple cache to store generated rules
-var registered = styleSheet.registered = {};
-function register(spec) {
-  if (!registered[spec.id]) {
-    registered[spec.id] = spec;
-  }
-}
-
-function _getRegistered(rule) {
-  if (isLikeRule(rule)) {
-    var ret = registered[idFor(rule)];
-    if (ret == null) {
-      throw new Error('[glamor] an unexpected rule cache miss occurred. This is probably a sign of multiple glamor instances in your app. See https://github.com/threepointone/glamor/issues/79');
-    }
-    return ret;
-  }
-  return rule;
-}
-
-// todo - perf
-var ruleCache = {};
-function toRule(spec) {
-  register(spec);
-  insert(spec);
-
-  if (ruleCache[spec.id]) {
-    return ruleCache[spec.id];
-  }
-
-  var ret = _defineProperty({}, 'data-css-' + spec.id, hasLabels ? spec.label || '' : '');
-  Object.defineProperty(ret, 'toString', {
-    enumerable: false, value: function value() {
-      return 'css-' + spec.id;
-    }
-  });
-  ruleCache[spec.id] = ret;
-  return ret;
-}
-
-function log() {
-  //eslint-disable-line no-unused-vars
-  console.log(this); //eslint-disable-line no-console
-  return this;
-}
-
-function isSelector(key) {
-  var possibles = [':', '.', '[', '>', ' '],
-      found = false,
-      ch = key.charAt(0);
-  for (var i = 0; i < possibles.length; i++) {
-    if (ch === possibles[i]) {
-      found = true;
-      break;
-    }
-  }
-  return found || key.indexOf('&') >= 0;
-}
-
-function joinSelectors(a, b) {
-  var as = splitSelector(a).map(function (a) {
-    return !(a.indexOf('&') >= 0) ? '&' + a : a;
-  });
-  var bs = splitSelector(b).map(function (b) {
-    return !(b.indexOf('&') >= 0) ? '&' + b : b;
-  });
-
-  return bs.reduce(function (arr, b) {
-    return arr.concat(as.map(function (a) {
-      return b.replace(/\&/g, a);
-    }));
-  }, []).join(',');
-}
-
-function joinMediaQueries(a, b) {
-  return a ? '@media ' + a.substring(6) + ' and ' + b.substring(6) : b;
-}
-
-function isMediaQuery(key) {
-  return key.indexOf('@media') === 0;
-}
-
-function isSupports(key) {
-  return key.indexOf('@supports') === 0;
-}
-
-function joinSupports(a, b) {
-  return a ? '@supports ' + a.substring(9) + ' and ' + b.substring(9) : b;
-}
-
-// flatten a nested array
-function flatten(inArr) {
-  var arr = [];
-  for (var i = 0; i < inArr.length; i++) {
-    if (Array.isArray(inArr[i])) arr = arr.concat(flatten(inArr[i]));else arr = arr.concat(inArr[i]);
-  }
-  return arr;
-}
-
-var prefixedPseudoSelectors = {
-  '::placeholder': ['::-webkit-input-placeholder', '::-moz-placeholder', '::-ms-input-placeholder'],
-  ':fullscreen': [':-webkit-full-screen', ':-moz-full-screen', ':-ms-fullscreen']
-
-  // mutable! modifies dest.
-};function build(dest, _ref2) {
-  var _ref2$selector = _ref2.selector,
-      selector = _ref2$selector === undefined ? '' : _ref2$selector,
-      _ref2$mq = _ref2.mq,
-      mq = _ref2$mq === undefined ? '' : _ref2$mq,
-      _ref2$supp = _ref2.supp,
-      supp = _ref2$supp === undefined ? '' : _ref2$supp,
-      _ref2$src = _ref2.src,
-      src = _ref2$src === undefined ? {} : _ref2$src;
-
-
-  if (!Array.isArray(src)) {
-    src = [src];
-  }
-  src = flatten(src);
-
-  src.forEach(function (_src) {
-    if (isLikeRule(_src)) {
-      var reg = _getRegistered(_src);
-      if (reg.type !== 'css') {
-        throw new Error('cannot merge this rule');
-      }
-      _src = reg.style;
-    }
-    _src = (0, _clean2.default)(_src);
-    if (_src && _src.composes) {
-      build(dest, { selector: selector, mq: mq, supp: supp, src: _src.composes });
-    }
-    Object.keys(_src || {}).forEach(function (key) {
-      if (isSelector(key)) {
-
-        if (prefixedPseudoSelectors[key]) {
-          prefixedPseudoSelectors[key].forEach(function (p) {
-            return build(dest, { selector: joinSelectors(selector, p), mq: mq, supp: supp, src: _src[key] });
-          });
-        }
-
-        build(dest, { selector: joinSelectors(selector, key), mq: mq, supp: supp, src: _src[key] });
-      } else if (isMediaQuery(key)) {
-        build(dest, { selector: selector, mq: joinMediaQueries(mq, key), supp: supp, src: _src[key] });
-      } else if (isSupports(key)) {
-        build(dest, { selector: selector, mq: mq, supp: joinSupports(supp, key), src: _src[key] });
-      } else if (key === 'composes') {
-        // ignore, we already dealth with it
-      } else {
-        var _dest = dest;
-        if (supp) {
-          _dest[supp] = _dest[supp] || {};
-          _dest = _dest[supp];
-        }
-        if (mq) {
-          _dest[mq] = _dest[mq] || {};
-          _dest = _dest[mq];
-        }
-        if (selector) {
-          _dest[selector] = _dest[selector] || {};
-          _dest = _dest[selector];
-        }
-
-        if (key === 'label') {
-          if (hasLabels) {
-            dest.label = dest.label.concat(_src.label);
-          }
-        } else {
-          _dest[key] = _src[key];
-        }
-      }
-    });
-  });
-}
-
-function _css(rules) {
-  var style = { label: [] };
-  build(style, { src: rules }); // mutative! but worth it.
-
-  var spec = {
-    id: hashify(style),
-    style: style, label: hasLabels ? style.label.join('.') : '',
-    type: 'css'
-  };
-  return toRule(spec);
-}
-
-var nullrule = {
-  // 'data-css-nil': ''
-};
-Object.defineProperty(nullrule, 'toString', {
-  enumerable: false, value: function value() {
-    return 'css-nil';
-  }
-});
-
-var inputCaches = typeof WeakMap !== 'undefined' ? [nullrule, new WeakMap(), new WeakMap(), new WeakMap()] : [nullrule];
-
-var warnedWeakMapError = false;
-function multiIndexCache(fn) {
-  return function (args) {
-    if (inputCaches[args.length]) {
-      var coi = inputCaches[args.length];
-      var ctr = 0;
-      while (ctr < args.length - 1) {
-        if (!coi.has(args[ctr])) {
-          coi.set(args[ctr], new WeakMap());
-        }
-        coi = coi.get(args[ctr]);
-        ctr++;
-      }
-      if (coi.has(args[args.length - 1])) {
-        var ret = coi.get(args[ctr]);
-
-        if (registered[ret.toString().substring(4)]) {
-          // make sure it hasn't been flushed
-          return ret;
-        }
-      }
-    }
-    var value = fn(args);
-    if (inputCaches[args.length]) {
-      var _ctr = 0,
-          _coi = inputCaches[args.length];
-      while (_ctr < args.length - 1) {
-        _coi = _coi.get(args[_ctr]);
-        _ctr++;
-      }
-      try {
-        _coi.set(args[_ctr], value);
-      } catch (err) {
-        if (isDev && !warnedWeakMapError) {
-          var _console;
-
-          warnedWeakMapError = true;
-          (_console = console).warn.apply(_console, ['failed setting the WeakMap cache for args:'].concat(_toConsumableArray(args))); // eslint-disable-line no-console
-          console.warn('this should NOT happen, please file a bug on the github repo.'); // eslint-disable-line no-console
-        }
-      }
-    }
-    return value;
-  };
-}
-
-var cachedCss = typeof WeakMap !== 'undefined' ? multiIndexCache(_css) : _css;
-
-function css() {
-  for (var _len2 = arguments.length, rules = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-    rules[_key2] = arguments[_key2];
-  }
-
-  if (rules[0] && rules[0].length && rules[0].raw) {
-    throw new Error('you forgot to include glamor/babel in your babel plugins.');
-  }
-
-  rules = (0, _clean2.default)(rules);
-  if (!rules) {
-    return nullrule;
-  }
-
-  return cachedCss(rules);
-}
-
-css.insert = function (css) {
-  var spec = {
-    id: hashify(css),
-    css: css,
-    type: 'raw'
-  };
-  register(spec);
-  if (!inserted[spec.id]) {
-    styleSheet.insert(spec.css);
-    inserted[spec.id] = isBrowser ? true : [spec.css];
-  }
-};
-
-var insertRule = exports.insertRule = css.insert;
-
-css.global = function (selector, style) {
-  style = (0, _clean2.default)(style);
-  if (style) {
-    return css.insert(toCSS({ selector: selector, style: style }));
-  }
-};
-
-var insertGlobal = exports.insertGlobal = css.global;
-
-function insertKeyframe(spec) {
-  if (!inserted[spec.id]) {
-    var inner = Object.keys(spec.keyframes).map(function (kf) {
-      var result = plugins.keyframes.transform({ id: spec.id, name: kf, style: spec.keyframes[kf] });
-      return result.name + '{' + (0, _CSSPropertyOperations.createMarkupForStyles)(result.style) + '}';
-    }).join('');
-
-    var rules = ['-webkit-', '-moz-', '-o-', ''].map(function (prefix) {
-      return '@' + prefix + 'keyframes ' + (spec.name + '_' + spec.id) + '{' + inner + '}';
-    });
-    rules.forEach(function (rule) {
-      return styleSheet.insert(rule);
-    });
-
-    inserted[spec.id] = isBrowser ? true : rules;
-  }
-}
-css.keyframes = function (name, kfs) {
-  if (!kfs) {
-    kfs = name, name = 'animation';
-  }
-
-  // do not ignore empty keyframe definitions for now.
-  kfs = (0, _clean2.default)(kfs) || {};
-  var spec = {
-    id: hashify({ name: name, kfs: kfs }),
-    type: 'keyframes',
-    name: name,
-    keyframes: kfs
-  };
-  register(spec);
-  insertKeyframe(spec);
-  return name + '_' + spec.id;
-};
-
-// we don't go all out for fonts as much, giving a simple font loading strategy
-// use a fancier lib if you need moar power
-css.fontFace = function (font) {
-  font = (0, _clean2.default)(font);
-  var spec = {
-    id: hashify(font),
-    type: 'font-face',
-    font: font
-  };
-  register(spec);
-  insertFontFace(spec);
-
-  return font.fontFamily;
-};
-
-var fontFace = exports.fontFace = css.fontFace;
-var keyframes = exports.keyframes = css.keyframes;
-
-function insertFontFace(spec) {
-  if (!inserted[spec.id]) {
-    var rule = '@font-face{' + (0, _CSSPropertyOperations.createMarkupForStyles)(spec.font) + '}';
-    styleSheet.insert(rule);
-    inserted[spec.id] = isBrowser ? true : [rule];
-  }
-}
-
-// rehydrate the insertion cache with ids sent from
-// renderStatic / renderStaticOptimized
-function rehydrate(ids) {
-  // load up ids
-  (0, _objectAssign2.default)(inserted, ids.reduce(function (o, i) {
-    return o[i] = true, o;
-  }, {}));
-  // assume css loaded separately
-}
-
-// clears out the cache and empties the stylesheet
-// best for tests, though there might be some value for SSR.
-
-function flush() {
-  inserted = styleSheet.inserted = {};
-  registered = styleSheet.registered = {};
-  ruleCache = {};
-  styleSheet.flush();
-  styleSheet.inject();
-}
-
-var presets = exports.presets = {
-  mobile: '(min-width: 400px)',
-  Mobile: '@media (min-width: 400px)',
-  phablet: '(min-width: 550px)',
-  Phablet: '@media (min-width: 550px)',
-  tablet: '(min-width: 750px)',
-  Tablet: '@media (min-width: 750px)',
-  desktop: '(min-width: 1000px)',
-  Desktop: '@media (min-width: 1000px)',
-  hd: '(min-width: 1200px)',
-  Hd: '@media (min-width: 1200px)'
-};
-
-var style = exports.style = css;
-
-function select(selector) {
-  for (var _len3 = arguments.length, styles = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-    styles[_key3 - 1] = arguments[_key3];
-  }
-
-  if (!selector) {
-    return style(styles);
-  }
-  return css(_defineProperty({}, selector, styles));
-}
-var $ = exports.$ = select;
-
-function parent(selector) {
-  for (var _len4 = arguments.length, styles = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-    styles[_key4 - 1] = arguments[_key4];
-  }
-
-  return css(_defineProperty({}, selector + ' &', styles));
-}
-
-var merge = exports.merge = css;
-var compose = exports.compose = css;
-
-function media(query) {
-  for (var _len5 = arguments.length, rules = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-    rules[_key5 - 1] = arguments[_key5];
-  }
-
-  return css(_defineProperty({}, '@media ' + query, rules));
-}
-
-function pseudo(selector) {
-  for (var _len6 = arguments.length, styles = Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
-    styles[_key6 - 1] = arguments[_key6];
-  }
-
-  return css(_defineProperty({}, selector, styles));
-}
-
-// allllll the pseudoclasses
-
-function active(x) {
-  return pseudo(':active', x);
-}
-
-function any(x) {
-  return pseudo(':any', x);
-}
-
-function checked(x) {
-  return pseudo(':checked', x);
-}
-
-function disabled(x) {
-  return pseudo(':disabled', x);
-}
-
-function empty(x) {
-  return pseudo(':empty', x);
-}
-
-function enabled(x) {
-  return pseudo(':enabled', x);
-}
-
-function _default(x) {
-  return pseudo(':default', x); // note '_default' name
-}
-
-function first(x) {
-  return pseudo(':first', x);
-}
-
-function firstChild(x) {
-  return pseudo(':first-child', x);
-}
-
-function firstOfType(x) {
-  return pseudo(':first-of-type', x);
-}
-
-function fullscreen(x) {
-  return pseudo(':fullscreen', x);
-}
-
-function focus(x) {
-  return pseudo(':focus', x);
-}
-
-function hover(x) {
-  return pseudo(':hover', x);
-}
-
-function indeterminate(x) {
-  return pseudo(':indeterminate', x);
-}
-
-function inRange(x) {
-  return pseudo(':in-range', x);
-}
-
-function invalid(x) {
-  return pseudo(':invalid', x);
-}
-
-function lastChild(x) {
-  return pseudo(':last-child', x);
-}
-
-function lastOfType(x) {
-  return pseudo(':last-of-type', x);
-}
-
-function left(x) {
-  return pseudo(':left', x);
-}
-
-function link(x) {
-  return pseudo(':link', x);
-}
-
-function onlyChild(x) {
-  return pseudo(':only-child', x);
-}
-
-function onlyOfType(x) {
-  return pseudo(':only-of-type', x);
-}
-
-function optional(x) {
-  return pseudo(':optional', x);
-}
-
-function outOfRange(x) {
-  return pseudo(':out-of-range', x);
-}
-
-function readOnly(x) {
-  return pseudo(':read-only', x);
-}
-
-function readWrite(x) {
-  return pseudo(':read-write', x);
-}
-
-function required(x) {
-  return pseudo(':required', x);
-}
-
-function right(x) {
-  return pseudo(':right', x);
-}
-
-function root(x) {
-  return pseudo(':root', x);
-}
-
-function scope(x) {
-  return pseudo(':scope', x);
-}
-
-function target(x) {
-  return pseudo(':target', x);
-}
-
-function valid(x) {
-  return pseudo(':valid', x);
-}
-
-function visited(x) {
-  return pseudo(':visited', x);
-}
-
-// parameterized pseudoclasses
-function dir(p, x) {
-  return pseudo(':dir(' + p + ')', x);
-}
-function lang(p, x) {
-  return pseudo(':lang(' + p + ')', x);
-}
-function not(p, x) {
-  // should this be a plugin?
-  var selector = p.split(',').map(function (x) {
-    return x.trim();
-  }).map(function (x) {
-    return ':not(' + x + ')';
-  });
-  if (selector.length === 1) {
-    return pseudo(':not(' + p + ')', x);
-  }
-  return select(selector.join(''), x);
-}
-function nthChild(p, x) {
-  return pseudo(':nth-child(' + p + ')', x);
-}
-function nthLastChild(p, x) {
-  return pseudo(':nth-last-child(' + p + ')', x);
-}
-function nthLastOfType(p, x) {
-  return pseudo(':nth-last-of-type(' + p + ')', x);
-}
-function nthOfType(p, x) {
-  return pseudo(':nth-of-type(' + p + ')', x);
-}
-
-// pseudoelements
-function after(x) {
-  return pseudo('::after', x);
-}
-function before(x) {
-  return pseudo('::before', x);
-}
-function firstLetter(x) {
-  return pseudo('::first-letter', x);
-}
-function firstLine(x) {
-  return pseudo('::first-line', x);
-}
-function selection(x) {
-  return pseudo('::selection', x);
-}
-function backdrop(x) {
-  return pseudo('::backdrop', x);
-}
-function placeholder(x) {
-  // https://github.com/threepointone/glamor/issues/14
-  return css({ '::placeholder': x });
-}
-
-/*** helpers for web components ***/
-// https://github.com/threepointone/glamor/issues/16
-
-function cssFor() {
-  for (var _len7 = arguments.length, rules = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-    rules[_key7] = arguments[_key7];
-  }
-
-  rules = (0, _clean2.default)(rules);
-  return rules ? rules.map(function (r) {
-    var style = { label: [] };
-    build(style, { src: r }); // mutative! but worth it.
-    return deconstructedStyleToCSS(hashify(style), deconstruct(style)).join('');
-  }).join('') : '';
-}
-
-function attribsFor() {
-  for (var _len8 = arguments.length, rules = Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-    rules[_key8] = arguments[_key8];
-  }
-
-  rules = (0, _clean2.default)(rules);
-  var htmlAttributes = rules ? rules.map(function (rule) {
-    idFor(rule); // throwaway check for rule
-    var key = Object.keys(rule)[0],
-        value = rule[key];
-    return key + '="' + (value || '') + '"';
-  }).join(' ') : '';
-
-  return htmlAttributes;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/glamor/lib/plugins.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/@headspace/glamor/lib/plugins.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-exports.PluginSet = PluginSet;
-exports.fallbacks = fallbacks;
-exports.contentWrap = contentWrap;
-exports.prefixes = prefixes;
-
-var _objectAssign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-var _CSSPropertyOperations = __webpack_require__(/*! ./CSSPropertyOperations */ "./node_modules/@headspace/glamor/lib/CSSPropertyOperations/index.js");
-
-var _prefixer = __webpack_require__(/*! ./prefixer */ "./node_modules/@headspace/glamor/lib/prefixer.js");
-
-var _prefixer2 = _interopRequireDefault(_prefixer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var isDev = function (x) {
-  return x === 'development' || !x;
-}("development");
-
-function PluginSet(initial) {
-  this.fns = initial || [];
-}
-
-(0, _objectAssign2.default)(PluginSet.prototype, {
-  add: function add() {
-    var _this = this;
-
-    for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
-      fns[_key] = arguments[_key];
-    }
-
-    fns.forEach(function (fn) {
-      if (_this.fns.indexOf(fn) >= 0) {
-        if (isDev) {
-          console.warn('adding the same plugin again, ignoring'); //eslint-disable-line no-console
-        }
-      } else {
-        _this.fns = [fn].concat(_this.fns);
-      }
-    });
-  },
-  remove: function remove(fn) {
-    this.fns = this.fns.filter(function (x) {
-      return x !== fn;
-    });
-  },
-  clear: function clear() {
-    this.fns = [];
-  },
-  transform: function transform(o) {
-    return this.fns.reduce(function (o, fn) {
-      return fn(o);
-    }, o);
-  }
-});
-
-function fallbacks(node) {
-  var hasArray = Object.keys(node.style).map(function (x) {
-    return Array.isArray(node.style[x]);
-  }).indexOf(true) >= 0;
-  if (hasArray) {
-    var style = node.style;
-
-    var flattened = Object.keys(style).reduce(function (o, key) {
-      o[key] = Array.isArray(style[key]) ? style[key].join('; ' + (0, _CSSPropertyOperations.processStyleName)(key) + ': ') : style[key];
-      return o;
-    }, {});
-    // todo - 
-    // flatten arrays which haven't been flattened yet 
-    return (0, _objectAssign2.default)({}, node, { style: flattened });
-  }
-  return node;
-}
-
-var contentValues = ['normal', 'none', 'counter', 'open-quote', 'close-quote', 'no-open-quote', 'no-close-quote', 'initial', 'inherit'];
-
-function contentWrap(node) {
-  if (node.style.content) {
-    var cont = node.style.content;
-    if (contentValues.indexOf(cont) >= 0) {
-      return node;
-    }
-    if (/^(attr|calc|counters?|url)\(/.test(cont)) {
-      return node;
-    }
-    if (cont.charAt(0) === cont.charAt(cont.length - 1) && (cont.charAt(0) === '"' || cont.charAt(0) === "'")) {
-      return node;
-    }
-    return _extends({}, node, { style: _extends({}, node.style, { content: '"' + cont + '"' }) });
-  }
-  return node;
-}
-
-function prefixes(node) {
-  return (0, _objectAssign2.default)({}, node, { style: (0, _prefixer2.default)(_extends({}, node.style)) });
-}
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/glamor/lib/prefixer.js":
-/*!********************************************************!*\
-  !*** ./node_modules/@headspace/glamor/lib/prefixer.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = prefixer;
-
-var _staticData = __webpack_require__(/*! inline-style-prefixer/static/staticData */ "./node_modules/inline-style-prefixer/static/staticData.js");
-
-var _staticData2 = _interopRequireDefault(_staticData);
-
-var _prefixProperty = __webpack_require__(/*! inline-style-prefixer/utils/prefixProperty */ "./node_modules/inline-style-prefixer/utils/prefixProperty.js");
-
-var _prefixProperty2 = _interopRequireDefault(_prefixProperty);
-
-var _prefixValue = __webpack_require__(/*! inline-style-prefixer/utils/prefixValue */ "./node_modules/inline-style-prefixer/utils/prefixValue.js");
-
-var _prefixValue2 = _interopRequireDefault(_prefixValue);
-
-var _cursor = __webpack_require__(/*! inline-style-prefixer/static/plugins/cursor */ "./node_modules/inline-style-prefixer/static/plugins/cursor.js");
-
-var _cursor2 = _interopRequireDefault(_cursor);
-
-var _crossFade = __webpack_require__(/*! inline-style-prefixer/static/plugins/crossFade */ "./node_modules/inline-style-prefixer/static/plugins/crossFade.js");
-
-var _crossFade2 = _interopRequireDefault(_crossFade);
-
-var _filter = __webpack_require__(/*! inline-style-prefixer/static/plugins/filter */ "./node_modules/inline-style-prefixer/static/plugins/filter.js");
-
-var _filter2 = _interopRequireDefault(_filter);
-
-var _flex = __webpack_require__(/*! inline-style-prefixer/static/plugins/flex */ "./node_modules/inline-style-prefixer/static/plugins/flex.js");
-
-var _flex2 = _interopRequireDefault(_flex);
-
-var _flexboxOld = __webpack_require__(/*! inline-style-prefixer/static/plugins/flexboxOld */ "./node_modules/inline-style-prefixer/static/plugins/flexboxOld.js");
-
-var _flexboxOld2 = _interopRequireDefault(_flexboxOld);
-
-var _gradient = __webpack_require__(/*! inline-style-prefixer/static/plugins/gradient */ "./node_modules/inline-style-prefixer/static/plugins/gradient.js");
-
-var _gradient2 = _interopRequireDefault(_gradient);
-
-var _imageSet = __webpack_require__(/*! inline-style-prefixer/static/plugins/imageSet */ "./node_modules/inline-style-prefixer/static/plugins/imageSet.js");
-
-var _imageSet2 = _interopRequireDefault(_imageSet);
-
-var _position = __webpack_require__(/*! inline-style-prefixer/static/plugins/position */ "./node_modules/inline-style-prefixer/static/plugins/position.js");
-
-var _position2 = _interopRequireDefault(_position);
-
-var _sizing = __webpack_require__(/*! inline-style-prefixer/static/plugins/sizing */ "./node_modules/inline-style-prefixer/static/plugins/sizing.js");
-
-var _sizing2 = _interopRequireDefault(_sizing);
-
-var _transition = __webpack_require__(/*! inline-style-prefixer/static/plugins/transition */ "./node_modules/inline-style-prefixer/static/plugins/transition.js");
-
-var _transition2 = _interopRequireDefault(_transition);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var plugins = [_crossFade2.default, _cursor2.default, _filter2.default, _flexboxOld2.default, _gradient2.default, _imageSet2.default, _position2.default, _sizing2.default, _transition2.default, _flex2.default]; // custom facade for inline-style-prefixer
-
-var prefixMap = _staticData2.default.prefixMap;
-
-function prefixer(style) {
-  for (var property in style) {
-    var value = style[property];
-
-    var processedValue = (0, _prefixValue2.default)(plugins, property, value, style, prefixMap);
-
-    // only modify the value if it was touched
-    // by any plugin to prevent unnecessary mutations
-    if (processedValue) {
-      style[property] = processedValue;
-    }
-
-    (0, _prefixProperty2.default)(prefixMap, property, style);
-  }
-  return style;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/glamor/lib/sheet.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/@headspace/glamor/lib/sheet.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.StyleSheet = StyleSheet;
-
-var _objectAssign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-/* 
-
-high performance StyleSheet for css-in-js systems 
-
-- uses multiple style tags behind the scenes for millions of rules 
-- uses `insertRule` for appending in production for *much* faster performance
-- 'polyfills' on server side 
-
-
-// usage
-
-import StyleSheet from 'glamor/lib/sheet'
-let styleSheet = new StyleSheet()
-
-styleSheet.inject() 
-- 'injects' the stylesheet into the page (or into memory if on server)
-
-styleSheet.insert('#box { border: 1px solid red; }') 
-- appends a css rule into the stylesheet 
-
-styleSheet.flush() 
-- empties the stylesheet of all its contents
-
-
-*/
-
-function last(arr) {
-  return arr[arr.length - 1];
-}
-
-function sheetForTag(tag) {
-  if (tag.sheet) {
-    return tag.sheet;
-  }
-
-  // this weirdness brought to you by firefox 
-  for (var i = 0; i < document.styleSheets.length; i++) {
-    if (document.styleSheets[i].ownerNode === tag) {
-      return document.styleSheets[i];
-    }
-  }
-}
-
-var isBrowser =  true && window.document;
-var isDev =  true || false; //(x => (x === 'development') || !x)(process.env.NODE_ENV)
-var isTest = "development" === 'test';
-
-var oldIE = function () {
-  if (isBrowser) {
-    var div = document.createElement('div');
-    div.innerHTML = '<!--[if lt IE 10]><i></i><![endif]-->';
-    return div.getElementsByTagName('i').length === 1;
-  }
-}();
-
-function makeStyleTag() {
-  var tag = document.createElement('style');
-  tag.type = 'text/css';
-  tag.setAttribute('data-glamor', '');
-  tag.appendChild(document.createTextNode(''));
-  (document.head || document.getElementsByTagName('head')[0]).appendChild(tag);
-  return tag;
-}
-
-function StyleSheet() {
-  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref$speedy = _ref.speedy,
-      speedy = _ref$speedy === undefined ? !isDev && !isTest : _ref$speedy,
-      _ref$maxLength = _ref.maxLength,
-      maxLength = _ref$maxLength === undefined ? isBrowser && oldIE ? 4000 : 65000 : _ref$maxLength;
-
-  this.isSpeedy = speedy; // the big drawback here is that the css won't be editable in devtools
-  this.sheet = undefined;
-  this.tags = [];
-  this.maxLength = maxLength;
-  this.ctr = 0;
-}
-
-(0, _objectAssign2.default)(StyleSheet.prototype, {
-  getSheet: function getSheet() {
-    return sheetForTag(last(this.tags));
-  },
-  inject: function inject() {
-    var _this = this;
-
-    if (this.injected) {
-      throw new Error('already injected stylesheet!');
-    }
-    if (isBrowser) {
-      this.tags[0] = makeStyleTag();
-    } else {
-      // server side 'polyfill'. just enough behavior to be useful.
-      this.sheet = {
-        cssRules: [],
-        insertRule: function insertRule(rule) {
-          // enough 'spec compliance' to be able to extract the rules later  
-          // in other words, just the cssText field 
-          _this.sheet.cssRules.push({ cssText: rule });
-        }
-      };
-    }
-    this.injected = true;
-  },
-  speedy: function speedy(bool) {
-    if (this.ctr !== 0) {
-      throw new Error('cannot change speedy mode after inserting any rule to sheet. Either call speedy(' + bool + ') earlier in your app, or call flush() before speedy(' + bool + ')');
-    }
-    this.isSpeedy = !!bool;
-  },
-  _insert: function _insert(rule) {
-    // this weirdness for perf, and chrome's weird bug 
-    // https://stackoverflow.com/questions/20007992/chrome-suddenly-stopped-accepting-insertrule
-    try {
-      var sheet = this.getSheet();
-      sheet.insertRule(rule, rule.indexOf('@import') !== -1 ? 0 : sheet.cssRules.length);
-    } catch (e) {
-      if (isDev) {
-        // might need beter dx for this 
-        console.warn('whoops, illegal rule inserted', rule); //eslint-disable-line no-console
-      }
-    }
-  },
-  insert: function insert(rule) {
-
-    if (isBrowser) {
-      // this is the ultrafast version, works across browsers 
-      if (this.isSpeedy && this.getSheet().insertRule) {
-        this._insert(rule);
-      }
-      // more browser weirdness. I don't even know    
-      // else if(this.tags.length > 0 && this.tags::last().styleSheet) {      
-      //   this.tags::last().styleSheet.cssText+= rule
-      // }
-      else {
-          if (rule.indexOf('@import') !== -1) {
-            var tag = last(this.tags);
-            tag.insertBefore(document.createTextNode(rule), tag.firstChild);
-          } else {
-            last(this.tags).appendChild(document.createTextNode(rule));
-          }
-        }
-    } else {
-      // server side is pretty simple         
-      this.sheet.insertRule(rule, rule.indexOf('@import') !== -1 ? 0 : this.sheet.cssRules.length);
-    }
-
-    this.ctr++;
-    if (isBrowser && this.ctr % this.maxLength === 0) {
-      this.tags.push(makeStyleTag());
-    }
-    return this.ctr - 1;
-  },
-
-  // commenting this out till we decide on v3's decision 
-  // _replace(index, rule) {
-  //   // this weirdness for perf, and chrome's weird bug 
-  //   // https://stackoverflow.com/questions/20007992/chrome-suddenly-stopped-accepting-insertrule
-  //   try {  
-  //     let sheet = this.getSheet()        
-  //     sheet.deleteRule(index) // todo - correct index here     
-  //     sheet.insertRule(rule, index)
-  //   }
-  //   catch(e) {
-  //     if(isDev) {
-  //       // might need beter dx for this 
-  //       console.warn('whoops, problem replacing rule', rule) //eslint-disable-line no-console
-  //     }          
-  //   }          
-
-  // }
-  // replace(index, rule) {
-  //   if(isBrowser) {
-  //     if(this.isSpeedy && this.getSheet().insertRule) {
-  //       this._replace(index, rule)
-  //     }
-  //     else {
-  //       let _slot = Math.floor((index  + this.maxLength) / this.maxLength) - 1        
-  //       let _index = (index % this.maxLength) + 1
-  //       let tag = this.tags[_slot]
-  //       tag.replaceChild(document.createTextNode(rule), tag.childNodes[_index])
-  //     }
-  //   }
-  //   else {
-  //     let rules = this.sheet.cssRules
-  //     this.sheet.cssRules = [ ...rules.slice(0, index), { cssText: rule }, ...rules.slice(index + 1) ]
-  //   }
-  // }
-  delete: function _delete(index) {
-    // we insert a blank rule when 'deleting' so previously returned indexes remain stable
-    return this.replace(index, '');
-  },
-  flush: function flush() {
-    if (isBrowser) {
-      this.tags.forEach(function (tag) {
-        return tag.parentNode.removeChild(tag);
-      });
-      this.tags = [];
-      this.sheet = null;
-      this.ctr = 0;
-      // todo - look for remnants in document.styleSheets
-    } else {
-      // simpler on server 
-      this.sheet.cssRules = [];
-    }
-    this.injected = false;
-  },
-  rules: function rules() {
-    if (!isBrowser) {
-      return this.sheet.cssRules;
-    }
-    var arr = [];
-    this.tags.forEach(function (tag) {
-      return arr.splice.apply(arr, [arr.length, 0].concat(_toConsumableArray(Array.from(sheetForTag(tag).cssRules))));
-    });
-    return arr;
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/components/base-box.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/components/base-box.js ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
-            t[p[i]] = s[p[i]];
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-var spacing = __webpack_require__(/*! ../styles/spacing */ "./node_modules/@headspace/web-styles/dist/styles/spacing.js");
-var colors = __webpack_require__(/*! ../styles/colors */ "./node_modules/@headspace/web-styles/dist/styles/colors.js");
-var flexStyles = __webpack_require__(/*! ../styles/flex */ "./node_modules/@headspace/web-styles/dist/styles/flex.js");
-var css_1 = __webpack_require__(/*! ../lib/css */ "./node_modules/@headspace/web-styles/dist/lib/css.js");
-var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/@headspace/web-styles/dist/components/utils.js");
-var BaseBox = function (_a) {
-    var alignItems = _a.alignItems, backgroundColor = _a.backgroundColor, color = _a.color, _b = _a.Component, Component = _b === void 0 ? 'div' : _b, display = _a.display, flex = _a.flex, flexBasis = _a.flexBasis, flexGrow = _a.flexGrow, flexDirection = _a.flexDirection, flexShrink = _a.flexShrink, flexWrap = _a.flexWrap, justifyContent = _a.justifyContent, margin = _a.margin, marginBottom = _a.marginBottom, marginLeft = _a.marginLeft, marginRight = _a.marginRight, marginTop = _a.marginTop, padding = _a.padding, paddingBottom = _a.paddingBottom, paddingLeft = _a.paddingLeft, paddingRight = _a.paddingRight, paddingTop = _a.paddingTop, position = _a.position, textAlign = _a.textAlign, textDecoration = _a.textDecoration, forwardRef = _a.forwardRef, className = _a.className, otherProps = __rest(_a, ["alignItems", "backgroundColor", "color", "Component", "display", "flex", "flexBasis", "flexGrow", "flexDirection", "flexShrink", "flexWrap", "justifyContent", "margin", "marginBottom", "marginLeft", "marginRight", "marginTop", "padding", "paddingBottom", "paddingLeft", "paddingRight", "paddingTop", "position", "textAlign", "textDecoration", "forwardRef", "className"]);
-    var spacingProperties = {
-        margin: margin,
-        marginBottom: marginBottom,
-        marginLeft: marginLeft,
-        marginRight: marginRight,
-        marginTop: marginTop,
-        padding: padding,
-        paddingBottom: paddingBottom,
-        paddingLeft: paddingLeft,
-        paddingRight: paddingRight,
-        paddingTop: paddingTop,
-    };
-    var spacingStyle = utils_1.getStyleProps(spacingProperties, spacing);
-    var appendedStyle = css_1.default({
-        display: display,
-        position: position,
-        textAlign: textAlign,
-        textDecoration: textDecoration,
-        backgroundColor: colors[backgroundColor],
-        color: colors[color],
-    });
-    var flexProperties = {
-        alignItems: alignItems,
-        flex: flex,
-        flexBasis: flexBasis,
-        flexGrow: flexGrow,
-        flexDirection: flexDirection,
-        flexShrink: flexShrink,
-        flexWrap: flexWrap,
-        justifyContent: justifyContent,
-    };
-    var flexStyle = utils_1.getStyleProps(flexProperties, flexStyles);
-    var styleClasses = utils_1.stylesToClassNames(className, spacingStyle, appendedStyle, flexStyle);
-    return (React.createElement(Component, __assign({ ref: forwardRef, className: styleClasses }, otherProps)));
-};
-exports.BaseBox = BaseBox;
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/components/box.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/components/box.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
-            t[p[i]] = s[p[i]];
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-var flexStyles = __webpack_require__(/*! ../styles/flex */ "./node_modules/@headspace/web-styles/dist/styles/flex.js");
-var base_box_1 = __webpack_require__(/*! ./base-box */ "./node_modules/@headspace/web-styles/dist/components/base-box.js");
-var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/@headspace/web-styles/dist/components/utils.js");
-var Box = function (_a) {
-    var className = _a.className, display = _a.display, _b = _a.flexDirection, flexDirection = _b === void 0 ? 'column' : _b, otherProps = __rest(_a, ["className", "display", "flexDirection"]);
-    var styleClasses = utils_1.stylesToClassNames(className, display ? {} : flexStyles.flex);
-    return (React.createElement(base_box_1.BaseBox, __assign({ className: styleClasses, flexDirection: flexDirection, display: display }, otherProps)));
-};
-exports.Box = Box;
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/components/col.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/components/col.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
-            t[p[i]] = s[p[i]];
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-var grid = __webpack_require__(/*! ../styles/grid */ "./node_modules/@headspace/web-styles/dist/styles/grid.js");
-var box_1 = __webpack_require__(/*! ./box */ "./node_modules/@headspace/web-styles/dist/components/box.js");
-var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/@headspace/web-styles/dist/components/utils.js");
-function getFallback() {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    return args.reduce(function (accum, value) {
-        if (!accum && value)
-            return value;
-        return accum;
-    }, args[0]);
-}
-exports.getFallback = getFallback;
-var Col = function (_a) {
-    var className = _a.className, l = _a.l, m = _a.m, s = _a.s, pushL = _a.pushL, pushM = _a.pushM, pushS = _a.pushS, props = __rest(_a, ["className", "l", "m", "s", "pushL", "pushM", "pushS"]);
-    var styleClasses = utils_1.stylesToClassNames('hs-col', className, grid["col" + getFallback(l, m) + "l"], grid["col" + m + "m"], grid["col" + s + "s"], grid["push" + getFallback(pushL, pushM) + "l"], grid["push" + pushM + "m"], grid["push" + pushS + "s"]);
-    return React.createElement(box_1.Box, __assign({ className: styleClasses }, props));
-};
-exports.Col = Col;
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/components/container.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/components/container.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
-            t[p[i]] = s[p[i]];
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-var grid_1 = __webpack_require__(/*! ../styles/grid */ "./node_modules/@headspace/web-styles/dist/styles/grid.js");
-var box_1 = __webpack_require__(/*! ./box */ "./node_modules/@headspace/web-styles/dist/components/box.js");
-var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/@headspace/web-styles/dist/components/utils.js");
-var Container = function (_a) {
-    var className = _a.className, props = __rest(_a, ["className"]);
-    var styleClasses = utils_1.stylesToClassNames(className, grid_1.container);
-    return React.createElement(box_1.Box, __assign({ className: styleClasses }, props));
-};
-exports.Container = Container;
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/components/utils.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/components/utils.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.titleCase = function (str) {
-    var castStr = "" + str;
-    return "" + castStr.slice(0, 1).toUpperCase() + castStr.slice(1);
-};
-exports.spaceToKebabCase = function (str) {
-    if (!str)
-        return '';
-    return str
-        .replace(/[^0-9a-zA-Z\-\s]/g, '')
-        .split(' ')
-        .join('-')
-        .toLowerCase();
-};
-exports.getStyleProps = function (properties, styleGuides, options) {
-    if (options === void 0) { options = {}; }
-    var _a = options.valueMap, valueMap = _a === void 0 ? {} : _a;
-    return Object.keys(properties).reduce(function (accum, property) {
-        var value = properties[property];
-        var key = "" + property + (value ? exports.titleCase(valueMap[value] || value) : '');
-        var styles = styleGuides[key];
-        if (styles && typeof value !== 'undefined') {
-            return accum.concat([styles]);
-        }
-        return accum;
-    }, []);
-};
-exports.stylesToClassNames = function () {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    var classes = args.reduce(function (accum, arg) {
-        if (arg === void 0) { arg = {}; }
-        if (Array.isArray(arg) && args.length) {
-            var res = exports.stylesToClassNames.apply(null, arg);
-            if (res)
-                return accum.concat([res]);
-            return accum.concat(arg);
-        }
-        if (typeof arg === 'object' && !arg.hasOwnProperty('toString')) {
-            return accum.concat(Object.keys(arg));
-        }
-        if (arg)
-            return accum.concat([arg]);
-        return accum;
-    }, []);
-    return classes.join(' ');
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/lib/css.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/lib/css.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var glamor_1 = __webpack_require__(/*! @headspace/glamor */ "./node_modules/@headspace/glamor/lib/index.js");
-exports.default = (function () {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    return glamor_1.css.apply(void 0, args);
-});
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/styles/breakpoints.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/styles/breakpoints.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.breakpoints = {
-    l: 1001,
-    m: 537,
-    s: 320,
-    currentBreakpoint: function (points) {
-        if (points === void 0) { points = []; }
-        var targets = points.length
-            ? points
-            : ['l', 'm', 's'];
-        var innerWidth = window.innerWidth;
-        var breakpoint = targets.reduce(function (ret, point) {
-            if (innerWidth < exports.breakpoints[ret]) {
-                return point;
-            }
-            return ret;
-        }, targets[0]);
-        return breakpoint;
-    },
-};
-exports.minWidths = {
-    m: "@media (min-width: " + exports.breakpoints.m + "px)",
-    l: "@media (min-width: " + exports.breakpoints.l + "px)",
-};
-exports.maxWidths = {
-    s: "@media (max-width: " + exports.breakpoints.s + "px)",
-    m: "@media (max-width: " + exports.breakpoints.m + "px)",
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/styles/colors.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/styles/colors.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.orangeA = '#F06E1D';
-exports.orangeB = '#F47D31';
-exports.orangeC = '#F58B44';
-exports.orangeD = '#F5A571';
-exports.chocolateA = '#514241';
-exports.chocolateB = '#665352';
-exports.chocolateC = '#7A6462';
-exports.chocolateD = '#8F7472';
-exports.plumA = '#413D45';
-exports.plumB = '#544F59';
-exports.plumC = '#67626E';
-exports.plumD = '#7A7482';
-exports.purpleA = '#4B5161';
-exports.purpleB = '#5A6175';
-exports.purpleC = '#626A7F';
-exports.purpleD = '#828DAB';
-exports.midnightA = '#101340';
-exports.midnightB = '#131A53';
-exports.midnightC = '#1E265F';
-exports.midnightD = '#3D3671';
-exports.indigoA = '#251B6F';
-exports.indigoB = '#3C3284';
-exports.indigoC = '#544A95';
-exports.indigoD = '#6155AE';
-exports.slateA = '#4C53B4';
-exports.slateB = '#5A61BB';
-exports.slateC = '#7074C5';
-exports.slateD = '#7E81C8';
-exports.periwinkleA = '#6E82E5';
-exports.periwinkleB = '#7C8DE6';
-exports.periwinkleC = '#93A2ED';
-exports.periwinkleD = '#9DAAEC';
-exports.violetA = '#D7A5D2';
-exports.violetB = '#D7B2D4';
-exports.violetC = '#E0BCDD';
-exports.violetD = '#EBCAE8';
-exports.blueA = '#4592D1';
-exports.blueB = '#559AD1';
-exports.blueC = '#64A4D9';
-exports.blueD = '#73B5EB';
-exports.skyA = '#52B6DE';
-exports.skyB = '#64BBDE';
-exports.skyC = '#72C7E8';
-exports.skyD = '#80D2F2';
-exports.aquaA = '#55C2BB';
-exports.aquaB = '#67C7C1';
-exports.aquaC = '#7BCDC8';
-exports.aquaD = '#8ED1CD';
-exports.greenA = '#77C79F';
-exports.greenB = '#86D1AC';
-exports.greenC = '#96D9B0';
-exports.greenD = '#A2E0C1';
-exports.yellowA = '#F5C471';
-exports.yellowB = '#FACA78';
-exports.yellowC = '#FED58C';
-exports.yellowD = '#FFDEA6';
-exports.redA = '#E85D4A';
-exports.redB = '#F1624E';
-exports.redC = '#FC6E5B';
-exports.redD = '#FF7C6B';
-exports.peachA = '#ED6F68';
-exports.peachB = '#F07973';
-exports.peachC = '#F28883';
-exports.peachD = '#F19B96';
-exports.pinkA = '#E8646F';
-exports.pinkB = '#F26C77';
-exports.pinkC = '#FC7C86';
-exports.pinkD = '#FF8F98';
-exports.sandA = '#EDD4C2';
-exports.sandB = '#F0D9C9';
-exports.sandC = '#F2DED0';
-exports.sandD = '#F5E4D7';
-exports.stoneA = '#EBE8E4';
-exports.stoneB = '#EFECE7';
-exports.stoneC = '#F5F2ED';
-exports.stoneD = '#FAF7F2';
-exports.paleA = '#F4E6D4';
-exports.paleB = '#F7ECDC';
-exports.paleC = '#FAF0E3';
-exports.paleD = '#FCF5EB';
-exports.greyA = '#4C4C4C';
-exports.greyB = '#666666';
-exports.greyC = '#999999';
-exports.greyD = '#B2B2B2';
-exports.white = '#FFFFFF';
-exports.black = '#000000';
-exports.spotify = '#2EBD59';
-exports.transparent = 'transparent';
-function toRGB(hex) {
-    if (hex === void 0) { hex = exports.purpleB; }
-    var bigint = parseInt(hex.replace(/[^0-9A-F]/gi, ''), 16);
-    return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
-}
-exports.toRGB = toRGB;
-function darken(hex, percent) {
-    var rgb = toRGB(hex);
-    var darker = rgb.map(function (v) {
-        var percentage = v * percent;
-        return Math.floor(v - percentage);
-    });
-    return "rgb(" + darker.join(',') + ")";
-}
-exports.darken = darken;
-function lighten(hex, percent) {
-    var rgb = toRGB(hex);
-    var darker = rgb.map(function (v) {
-        var percentage = (v + 1) * percent;
-        return Math.floor(v + percentage);
-    });
-    return "rgb(" + darker.join(',') + ")";
-}
-exports.lighten = lighten;
-function rgba(hex, alpha) {
-    var rgb = toRGB(hex);
-    return "rgba(\n    " + rgb.join(',') + ",\n    " + alpha + "\n  )";
-}
-exports.rgba = rgba;
-function getLuminance(hex) {
-    var _a = toRGB(hex), r = _a[0], g = _a[1], b = _a[2];
-    return (r * 0.299 + g * 0.587 + b * 0.114) / 256;
-}
-exports.getLuminance = getLuminance;
-function isLight(hex) {
-    var luminance = getLuminance(hex);
-    return luminance >= 0.6;
-}
-exports.isLight = isLight;
-function isDark(hex) {
-    var luminance = getLuminance(hex);
-    return luminance <= 0.59;
-}
-exports.isDark = isDark;
-function isHEX(val) {
-    return val && !!val.match(/^#/);
-}
-exports.isHEX = isHEX;
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/styles/flex.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/styles/flex.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var css_1 = __webpack_require__(/*! ../lib/css */ "./node_modules/@headspace/web-styles/dist/lib/css.js");
-var breakpoints_1 = __webpack_require__(/*! ./breakpoints */ "./node_modules/@headspace/web-styles/dist/styles/breakpoints.js");
-var reflowStyles = function (size, col) {
-    if (col === void 0) { col = true; }
-    var _a;
-    return css_1.default((_a = {
-            flexDirection: col ? 'column' : 'row'
-        },
-        _a[breakpoints_1.minWidths[size]] = {
-            flexDirection: col ? 'row' : 'column',
-        },
-        _a));
-};
-exports.flex = css_1.default({ display: 'flex' });
-exports.inlineFlex = css_1.default({ display: 'inline-flex' });
-exports.flexDirectionColumn = css_1.default({ flexDirection: 'column' });
-exports.flexDirectionColumnReverse = css_1.default({
-    flexDirection: 'column-reverse',
-});
-exports.flexDirectionRow = css_1.default({ flexDirection: 'row' });
-exports.flexDirectionRowReverse = css_1.default({ flexDirection: 'row-reverse' });
-exports.columnSmallReflow = reflowStyles('s');
-exports.columnMediumReflow = reflowStyles('m');
-exports.rowSmallReflow = reflowStyles('s', false);
-exports.rowMediumReflow = reflowStyles('m', false);
-exports.flex0 = css_1.default({ flex: '0 0 auto' });
-exports.flex1 = css_1.default({ flex: '1 0 auto' });
-exports.flex2 = css_1.default({ flex: '2 0 auto' });
-exports.flex3 = css_1.default({ flex: '3 0 auto' });
-exports.flex4 = css_1.default({ flex: '4 0 auto' });
-exports.flex5 = css_1.default({ flex: '5 0 auto' });
-exports.flex6 = css_1.default({ flex: '6 0 auto' });
-exports.flex7 = css_1.default({ flex: '7 0 auto' });
-exports.flex8 = css_1.default({ flex: '8 0 auto' });
-exports.flex9 = css_1.default({ flex: '9 0 auto' });
-exports.flex10 = css_1.default({ flex: '10 0 auto' });
-exports.flexNone = css_1.default({ flex: 'none' });
-exports.alignItemsCenter = css_1.default({ alignItems: 'center' });
-exports.justifyContentCenter = css_1.default({ justifyContent: 'center' });
-exports.alignItemsFlexStart = css_1.default({ alignItems: 'flex-start' });
-exports.justifyContentFlexStart = css_1.default({ justifyContent: 'flex-start' });
-exports.alignItemsFlexEnd = css_1.default({ alignItems: 'flex-end' });
-exports.justifyContentFlexEnd = css_1.default({ justifyContent: 'flex-end' });
-exports.alignItemsInitial = css_1.default({ alignItems: 'initial' });
-exports.justifyContentInitial = css_1.default({ justifyContent: 'initial' });
-exports.justifyContentSpaceBetween = css_1.default({
-    justifyContent: 'space-between',
-});
-exports.justifyContentAround = css_1.default({ justifyContent: 'space-around' });
-exports.flexWrapWrap = css_1.default({ flexWrap: 'wrap' });
-exports.flexWrapNoWrap = css_1.default({ flexWrap: 'no-wrap' });
-exports.flexWrapWrapReverse = css_1.default({ flexWrap: 'wrap-reverse' });
-exports.flexBasis0 = css_1.default({ '@media screen': { flexBasis: '0' } });
-exports.flexBasis1 = css_1.default({ '@media screen': { flexBasis: '1' } });
-exports.flexBasisAuto = css_1.default({ '@media screen': { flexBasis: 'auto' } });
-exports.flexBasis50Percent = css_1.default({
-    '@media screen': { flexBasis: '50%' },
-});
-exports.flexBasis100Percent = css_1.default({
-    '@media screen': { flexBasis: '100%' },
-});
-exports.flexBasisFull = css_1.default({ '@media screen': { flexBasis: '100%' } });
-exports.flexBasisSafariWrap = css_1.default({
-    '@media screen': { flexBasis: '15em' },
-});
-exports.flexShrink0 = css_1.default({ '@media screen': { flexShrink: '0' } });
-exports.flexShrink1 = css_1.default({ '@media screen': { flexShrink: '1' } });
-exports.flexShrinkAuto = css_1.default({ '@media screen': { flexShrink: 'auto' } });
-exports.flexGrow0 = css_1.default({ '@media screen': { flexGrow: '0' } });
-exports.flexGrow1 = css_1.default({ '@media screen': { flexGrow: '1' } });
-exports.flexGrowAuto = css_1.default({ '@media screen': { flexGrow: 'auto' } });
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/styles/grid.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/styles/grid.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var css_1 = __webpack_require__(/*! ../lib/css */ "./node_modules/@headspace/web-styles/dist/lib/css.js");
-var breakpoints_1 = __webpack_require__(/*! ./breakpoints */ "./node_modules/@headspace/web-styles/dist/styles/breakpoints.js");
-var flex_1 = __webpack_require__(/*! ./flex */ "./node_modules/@headspace/web-styles/dist/styles/flex.js");
-exports.gutterWidths = {
-    l: 24,
-    m: 24,
-    s: 16,
-};
-exports.marginWidths = {
-    l: 72,
-    m: 48,
-    s: 16,
-};
-exports.colAmount = {
-    l: 12,
-    m: 8,
-    s: 4,
-};
-exports.columnConfigs = {
-    l: {
-        gutterWidth: 24,
-        marginWidth: 72,
-        colAmount: 12,
-    },
-    m: {
-        gutterWidth: 24,
-        marginWidth: 48,
-        colAmount: 8,
-        lastBreakpoint: 'l',
-    },
-    s: {
-        gutterWidth: 16,
-        marginWidth: 16,
-        colAmount: 4,
-        lastBreakpoint: 'm',
-    },
-};
-var generateMediaQuery = function (from, to) {
-    var mediaquery = "@media(min-width: " + breakpoints_1.breakpoints[from] + "px)";
-    if (to) {
-        mediaquery = mediaquery + " and (max-width: " + (breakpoints_1.breakpoints[to] - 1) + "px)";
-    }
-    return mediaquery;
-};
-var generateColumn = function (breakpoint, colSize) {
-    var _a;
-    var _b = exports.columnConfigs[breakpoint], gutterWidth = _b.gutterWidth, colAmount = _b.colAmount, lastBreakpoint = _b.lastBreakpoint;
-    var width = (colSize / colAmount) * 100;
-    return css_1.default((_a = {},
-        _a[generateMediaQuery(breakpoint, lastBreakpoint)] = {
-            boxSizing: 'border-box',
-            flexBasis: width + "%",
-            maxWidth: width + "%",
-            width: width + "%",
-            paddingLeft: gutterWidth / 2,
-            paddingRight: gutterWidth / 2,
-        },
-        _a));
-};
-var generatePush = function (breakpoint, colSize) {
-    var _a;
-    var _b = exports.columnConfigs[breakpoint], colAmount = _b.colAmount, lastBreakpoint = _b.lastBreakpoint;
-    return css_1.default((_a = {},
-        _a[generateMediaQuery(breakpoint, lastBreakpoint)] = {
-            marginLeft: (colSize / colAmount) * 100 + "%",
-        },
-        _a));
-};
-var containerStyles = css_1.default(flex_1.flex, flex_1.flexDirectionRow, Object.keys(exports.colAmount)
-    .reverse()
-    .reduce(function (accum, breakpoint) {
-    var gutter = exports.gutterWidths[breakpoint];
-    var margin = exports.marginWidths[breakpoint];
-    var outerMargin = margin - gutter / 2;
-    accum["@media(min-width: " + breakpoints_1.breakpoints[breakpoint] + "px)"] = {
-        flexWrap: 'wrap',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        paddingLeft: outerMargin + "px",
-        paddingRight: outerMargin + "px",
-        width: '100%',
-        maxWidth: '1680px',
-        boxSizing: 'border-box',
-    };
-    return accum;
-}, {
-    marginLeft: "auto",
-    marginRight: "auto",
-}));
-exports.col1s = generateColumn('s', 1);
-exports.col2s = generateColumn('s', 2);
-exports.col3s = generateColumn('s', 3);
-exports.col4s = generateColumn('s', 4);
-exports.push1s = generatePush('s', 1);
-exports.push2s = generatePush('s', 2);
-exports.push3s = generatePush('s', 3);
-exports.push4s = generatePush('s', 4);
-exports.col1m = generateColumn('m', 1);
-exports.col2m = generateColumn('m', 2);
-exports.col3m = generateColumn('m', 3);
-exports.col4m = generateColumn('m', 4);
-exports.col5m = generateColumn('m', 5);
-exports.col6m = generateColumn('m', 6);
-exports.col7m = generateColumn('m', 7);
-exports.col8m = generateColumn('m', 8);
-exports.push1m = generatePush('m', 1);
-exports.push2m = generatePush('m', 2);
-exports.push3m = generatePush('m', 3);
-exports.push4m = generatePush('m', 4);
-exports.push5m = generatePush('m', 5);
-exports.push6m = generatePush('m', 6);
-exports.push7m = generatePush('m', 7);
-exports.push8m = generatePush('m', 8);
-exports.col1l = generateColumn('l', 1);
-exports.col2l = generateColumn('l', 2);
-exports.col3l = generateColumn('l', 3);
-exports.col4l = generateColumn('l', 4);
-exports.col5l = generateColumn('l', 5);
-exports.col6l = generateColumn('l', 6);
-exports.col7l = generateColumn('l', 7);
-exports.col8l = generateColumn('l', 8);
-exports.col9l = generateColumn('l', 9);
-exports.col10l = generateColumn('l', 10);
-exports.col11l = generateColumn('l', 11);
-exports.col12l = generateColumn('l', 12);
-exports.push1l = generatePush('l', 1);
-exports.push2l = generatePush('l', 2);
-exports.push3l = generatePush('l', 3);
-exports.push4l = generatePush('l', 4);
-exports.push5l = generatePush('l', 5);
-exports.push6l = generatePush('l', 6);
-exports.push7l = generatePush('l', 7);
-exports.push8l = generatePush('l', 8);
-exports.push9l = generatePush('l', 9);
-exports.push10l = generatePush('l', 10);
-exports.push11l = generatePush('l', 11);
-exports.push12l = generatePush('l', 12);
-exports.container = containerStyles;
-
-
-/***/ }),
-
-/***/ "./node_modules/@headspace/web-styles/dist/styles/spacing.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@headspace/web-styles/dist/styles/spacing.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var css_1 = __webpack_require__(/*! ../lib/css */ "./node_modules/@headspace/web-styles/dist/lib/css.js");
-var breakpoints_1 = __webpack_require__(/*! ./breakpoints */ "./node_modules/@headspace/web-styles/dist/styles/breakpoints.js");
-var grid_1 = __webpack_require__(/*! ./grid */ "./node_modules/@headspace/web-styles/dist/styles/grid.js");
-var SPACING_SIZES = {
-    auto: 'auto',
-    none: 0,
-    '4XS': 2,
-    '3XS': 4,
-    '2XS': 8,
-    XS: 12,
-    S: 16,
-    M: 24,
-    L: 32,
-    XL: 40,
-    '2XL': 64,
-    '3XL': 80,
-    '4XL': 128,
-};
-var generateSpacing = function (prop, size) {
-    var _a;
-    return css_1.default((_a = {}, _a[prop] = SPACING_SIZES[size], _a));
-};
-var generateGutterSpacing = function (prop) {
-    var _a, _b, _c, _d, _e;
-    return (_a = {},
-        _a[":nth-child(n)"] = (_b = {},
-            _b["@media screen"] = (_c = {},
-                _c[prop] = grid_1.gutterWidths.s + "px",
-                _c),
-            _b["@media (min-width: " + breakpoints_1.breakpoints.s + "px)"] = (_d = {},
-                _d[prop] = grid_1.gutterWidths.m + "px",
-                _d),
-            _b["@media (min-width: " + breakpoints_1.breakpoints.m + "px)"] = (_e = {},
-                _e[prop] = grid_1.gutterWidths.l + "px",
-                _e),
-            _b),
-        _a);
-};
-exports.marginAuto = generateSpacing('margin', 'auto');
-exports.marginNone = generateSpacing('margin', 'none');
-exports.margin4XS = generateSpacing('margin', '4XS');
-exports.margin3XS = generateSpacing('margin', '3XS');
-exports.margin2XS = generateSpacing('margin', '2XS');
-exports.marginXS = generateSpacing('margin', 'XS');
-exports.marginS = generateSpacing('margin', 'S');
-exports.marginM = generateSpacing('margin', 'M');
-exports.marginL = generateSpacing('margin', 'L');
-exports.marginXL = generateSpacing('margin', 'XL');
-exports.margin2XL = generateSpacing('margin', '2XL');
-exports.margin3XL = generateSpacing('margin', '3XL');
-exports.margin4XL = generateSpacing('margin', '4XL');
-exports.marginBottomAuto = generateSpacing('marginBottom', 'auto');
-exports.marginBottomNone = generateSpacing('marginBottom', 'none');
-exports.marginBottom4XS = generateSpacing('marginBottom', '4XS');
-exports.marginBottom3XS = generateSpacing('marginBottom', '3XS');
-exports.marginBottom2XS = generateSpacing('marginBottom', '2XS');
-exports.marginBottomXS = generateSpacing('marginBottom', 'XS');
-exports.marginBottomS = generateSpacing('marginBottom', 'S');
-exports.marginBottomM = generateSpacing('marginBottom', 'M');
-exports.marginBottomL = generateSpacing('marginBottom', 'L');
-exports.marginBottomXL = generateSpacing('marginBottom', 'XL');
-exports.marginBottom2XL = generateSpacing('marginBottom', '2XL');
-exports.marginBottom3XL = generateSpacing('marginBottom', '3XL');
-exports.marginBottom4XL = generateSpacing('marginBottom', '4XL');
-exports.marginTopAuto = generateSpacing('marginTop', 'auto');
-exports.marginTopNone = generateSpacing('marginTop', 'none');
-exports.marginTop4XS = generateSpacing('marginTop', '4XS');
-exports.marginTop3XS = generateSpacing('marginTop', '3XS');
-exports.marginTop2XS = generateSpacing('marginTop', '2XS');
-exports.marginTopXS = generateSpacing('marginTop', 'XS');
-exports.marginTopS = generateSpacing('marginTop', 'S');
-exports.marginTopM = generateSpacing('marginTop', 'M');
-exports.marginTopL = generateSpacing('marginTop', 'L');
-exports.marginTopXL = generateSpacing('marginTop', 'XL');
-exports.marginTop2XL = generateSpacing('marginTop', '2XL');
-exports.marginTop3XL = generateSpacing('marginTop', '3XL');
-exports.marginTop4XL = generateSpacing('marginTop', '4XL');
-exports.marginLeftAuto = generateSpacing('marginLeft', 'auto');
-exports.marginLeftNone = generateSpacing('marginLeft', 'none');
-exports.marginLeft4XS = generateSpacing('marginLeft', '4XS');
-exports.marginLeft3XS = generateSpacing('marginLeft', '3XS');
-exports.marginLeft2XS = generateSpacing('marginLeft', '2XS');
-exports.marginLeftXS = generateSpacing('marginLeft', 'XS');
-exports.marginLeftS = generateSpacing('marginLeft', 'S');
-exports.marginLeftM = generateSpacing('marginLeft', 'M');
-exports.marginLeftL = generateSpacing('marginLeft', 'L');
-exports.marginLeftXL = generateSpacing('marginLeft', 'XL');
-exports.marginLeft2XL = generateSpacing('marginLeft', '2XL');
-exports.marginLeft3XL = generateSpacing('marginLeft', '3XL');
-exports.marginLeft4XL = generateSpacing('marginLeft', '4XL');
-exports.marginRightAuto = generateSpacing('marginRight', 'auto');
-exports.marginRightNone = generateSpacing('marginRight', 'none');
-exports.marginRight4XS = generateSpacing('marginRight', '4XS');
-exports.marginRight3XS = generateSpacing('marginRight', '3XS');
-exports.marginRight2XS = generateSpacing('marginRight', '2XS');
-exports.marginRightXS = generateSpacing('marginRight', 'XS');
-exports.marginRightS = generateSpacing('marginRight', 'S');
-exports.marginRightM = generateSpacing('marginRight', 'M');
-exports.marginRightL = generateSpacing('marginRight', 'L');
-exports.marginRightXL = generateSpacing('marginRight', 'XL');
-exports.marginRight2XL = generateSpacing('marginRight', '2XL');
-exports.marginRight3XL = generateSpacing('marginRight', '3XL');
-exports.marginRight4XL = generateSpacing('marginRight', '4XL');
-exports.paddingAuto = generateSpacing('padding', 'auto');
-exports.paddingNone = generateSpacing('padding', 'none');
-exports.padding4XS = generateSpacing('padding', '4XS');
-exports.padding3XS = generateSpacing('padding', '3XS');
-exports.padding2XS = generateSpacing('padding', '2XS');
-exports.paddingXS = generateSpacing('padding', 'XS');
-exports.paddingS = generateSpacing('padding', 'S');
-exports.paddingM = generateSpacing('padding', 'M');
-exports.paddingL = generateSpacing('padding', 'L');
-exports.paddingXL = generateSpacing('padding', 'XL');
-exports.padding2XL = generateSpacing('padding', '2XL');
-exports.padding3XL = generateSpacing('padding', '3XL');
-exports.padding4XL = generateSpacing('padding', '4XL');
-exports.paddingBottomAuto = generateSpacing('paddingBottom', 'auto');
-exports.paddingBottomNone = generateSpacing('paddingBottom', 'none');
-exports.paddingBottom4XS = generateSpacing('paddingBottom', '4XS');
-exports.paddingBottom3XS = generateSpacing('paddingBottom', '3XS');
-exports.paddingBottom2XS = generateSpacing('paddingBottom', '2XS');
-exports.paddingBottomXS = generateSpacing('paddingBottom', 'XS');
-exports.paddingBottomS = generateSpacing('paddingBottom', 'S');
-exports.paddingBottomM = generateSpacing('paddingBottom', 'M');
-exports.paddingBottomL = generateSpacing('paddingBottom', 'L');
-exports.paddingBottomXL = generateSpacing('paddingBottom', 'XL');
-exports.paddingBottom2XL = generateSpacing('paddingBottom', '2XL');
-exports.paddingBottom3XL = generateSpacing('paddingBottom', '3XL');
-exports.paddingBottom4XL = generateSpacing('paddingBottom', '4XL');
-exports.paddingTopAuto = generateSpacing('paddingTop', 'auto');
-exports.paddingTopNone = generateSpacing('paddingTop', 'none');
-exports.paddingTop4XS = generateSpacing('paddingTop', '4XS');
-exports.paddingTop3XS = generateSpacing('paddingTop', '3XS');
-exports.paddingTop2XS = generateSpacing('paddingTop', '2XS');
-exports.paddingTopXS = generateSpacing('paddingTop', 'XS');
-exports.paddingTopS = generateSpacing('paddingTop', 'S');
-exports.paddingTopM = generateSpacing('paddingTop', 'M');
-exports.paddingTopL = generateSpacing('paddingTop', 'L');
-exports.paddingTopXL = generateSpacing('paddingTop', 'XL');
-exports.paddingTop2XL = generateSpacing('paddingTop', '2XL');
-exports.paddingTop3XL = generateSpacing('paddingTop', '3XL');
-exports.paddingTop4XL = generateSpacing('paddingTop', '4XL');
-exports.paddingLeftAuto = generateSpacing('paddingLeft', 'auto');
-exports.paddingLeftNone = generateSpacing('paddingLeft', 'none');
-exports.paddingLeft4XS = generateSpacing('paddingLeft', '4XS');
-exports.paddingLeft3XS = generateSpacing('paddingLeft', '3XS');
-exports.paddingLeft2XS = generateSpacing('paddingLeft', '2XS');
-exports.paddingLeftXS = generateSpacing('paddingLeft', 'XS');
-exports.paddingLeftS = generateSpacing('paddingLeft', 'S');
-exports.paddingLeftM = generateSpacing('paddingLeft', 'M');
-exports.paddingLeftL = generateSpacing('paddingLeft', 'L');
-exports.paddingLeftXL = generateSpacing('paddingLeft', 'XL');
-exports.paddingLeft2XL = generateSpacing('paddingLeft', '2XL');
-exports.paddingLeft3XL = generateSpacing('paddingLeft', '3XL');
-exports.paddingLeft4XL = generateSpacing('paddingLeft', '4XL');
-exports.paddingRightAuto = generateSpacing('paddingRight', 'auto');
-exports.paddingRightNone = generateSpacing('paddingRight', 'none');
-exports.paddingRight4XS = generateSpacing('paddingRight', '4XS');
-exports.paddingRight3XS = generateSpacing('paddingRight', '3XS');
-exports.paddingRight2XS = generateSpacing('paddingRight', '2XS');
-exports.paddingRightXS = generateSpacing('paddingRight', 'XS');
-exports.paddingRightS = generateSpacing('paddingRight', 'S');
-exports.paddingRightM = generateSpacing('paddingRight', 'M');
-exports.paddingRightL = generateSpacing('paddingRight', 'L');
-exports.paddingRightXL = generateSpacing('paddingRight', 'XL');
-exports.paddingRight2XL = generateSpacing('paddingRight', '2XL');
-exports.paddingRight3XL = generateSpacing('paddingRight', '3XL');
-exports.paddingRight4XL = generateSpacing('paddingRight', '4XL');
-exports.marginRightGutter = generateGutterSpacing('marginRight');
-exports.marginLeftGutter = generateGutterSpacing('marginLeft');
-exports.marginBottomGutter = generateGutterSpacing('marginBottom');
-exports.marginTopGutter = generateGutterSpacing('marginTop');
-exports.paddingRightGutter = generateGutterSpacing('paddingRight');
-exports.paddingLeftGutter = generateGutterSpacing('paddingLeft');
-exports.paddingBottomGutter = generateGutterSpacing('paddingBottom');
-exports.paddingTopGutter = generateGutterSpacing('paddingTop');
 
 
 /***/ }),
@@ -7634,57 +4650,6 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 /***/ }),
 
-/***/ "./node_modules/css-in-js-utils/lib/hyphenateProperty.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/css-in-js-utils/lib/hyphenateProperty.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = hyphenateProperty;
-
-var _hyphenateStyleName = __webpack_require__(/*! hyphenate-style-name */ "./node_modules/hyphenate-style-name/index.js");
-
-var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function hyphenateProperty(property) {
-  return (0, _hyphenateStyleName2.default)(property);
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/css-in-js-utils/lib/isPrefixedValue.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/css-in-js-utils/lib/isPrefixedValue.js ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = isPrefixedValue;
-var regex = /-webkit-|-moz-|-ms-/;
-
-function isPrefixedValue(value) {
-  return typeof value === 'string' && regex.test(value);
-}
-module.exports = exports['default'];
-
-/***/ }),
-
 /***/ "./node_modules/define-properties/index.js":
 /*!*************************************************!*\
   !*** ./node_modules/define-properties/index.js ***!
@@ -7752,340 +4717,6 @@ defineProperties.supportsDescriptors = !!supportsDescriptors;
 
 module.exports = defineProperties;
 
-
-/***/ }),
-
-/***/ "./node_modules/fbjs/lib/camelize.js":
-/*!*******************************************!*\
-  !*** ./node_modules/fbjs/lib/camelize.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @typechecks
- */
-
-var _hyphenPattern = /-(.)/g;
-
-/**
- * Camelcases a hyphenated string, for example:
- *
- *   > camelize('background-color')
- *   < "backgroundColor"
- *
- * @param {string} string
- * @return {string}
- */
-function camelize(string) {
-  return string.replace(_hyphenPattern, function (_, character) {
-    return character.toUpperCase();
-  });
-}
-
-module.exports = camelize;
-
-/***/ }),
-
-/***/ "./node_modules/fbjs/lib/camelizeStyleName.js":
-/*!****************************************************!*\
-  !*** ./node_modules/fbjs/lib/camelizeStyleName.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @typechecks
- */
-
-
-
-var camelize = __webpack_require__(/*! ./camelize */ "./node_modules/fbjs/lib/camelize.js");
-
-var msPattern = /^-ms-/;
-
-/**
- * Camelcases a hyphenated CSS property name, for example:
- *
- *   > camelizeStyleName('background-color')
- *   < "backgroundColor"
- *   > camelizeStyleName('-moz-transition')
- *   < "MozTransition"
- *   > camelizeStyleName('-ms-transition')
- *   < "msTransition"
- *
- * As Andi Smith suggests
- * (http://www.andismith.com/blog/2012/02/modernizr-prefixed/), an `-ms` prefix
- * is converted to lowercase `ms`.
- *
- * @param {string} string
- * @return {string}
- */
-function camelizeStyleName(string) {
-  return camelize(string.replace(msPattern, 'ms-'));
-}
-
-module.exports = camelizeStyleName;
-
-/***/ }),
-
-/***/ "./node_modules/fbjs/lib/emptyFunction.js":
-/*!************************************************!*\
-  !*** ./node_modules/fbjs/lib/emptyFunction.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * 
- */
-
-function makeEmptyFunction(arg) {
-  return function () {
-    return arg;
-  };
-}
-
-/**
- * This function accepts and discards inputs; it has no side effects. This is
- * primarily useful idiomatically for overridable function endpoints which
- * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
- */
-var emptyFunction = function emptyFunction() {};
-
-emptyFunction.thatReturns = makeEmptyFunction;
-emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-emptyFunction.thatReturnsThis = function () {
-  return this;
-};
-emptyFunction.thatReturnsArgument = function (arg) {
-  return arg;
-};
-
-module.exports = emptyFunction;
-
-/***/ }),
-
-/***/ "./node_modules/fbjs/lib/hyphenate.js":
-/*!********************************************!*\
-  !*** ./node_modules/fbjs/lib/hyphenate.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @typechecks
- */
-
-var _uppercasePattern = /([A-Z])/g;
-
-/**
- * Hyphenates a camelcased string, for example:
- *
- *   > hyphenate('backgroundColor')
- *   < "background-color"
- *
- * For CSS style names, use `hyphenateStyleName` instead which works properly
- * with all vendor prefixes, including `ms`.
- *
- * @param {string} string
- * @return {string}
- */
-function hyphenate(string) {
-  return string.replace(_uppercasePattern, '-$1').toLowerCase();
-}
-
-module.exports = hyphenate;
-
-/***/ }),
-
-/***/ "./node_modules/fbjs/lib/hyphenateStyleName.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/fbjs/lib/hyphenateStyleName.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @typechecks
- */
-
-
-
-var hyphenate = __webpack_require__(/*! ./hyphenate */ "./node_modules/fbjs/lib/hyphenate.js");
-
-var msPattern = /^ms-/;
-
-/**
- * Hyphenates a camelcased CSS property name, for example:
- *
- *   > hyphenateStyleName('backgroundColor')
- *   < "background-color"
- *   > hyphenateStyleName('MozTransition')
- *   < "-moz-transition"
- *   > hyphenateStyleName('msTransition')
- *   < "-ms-transition"
- *
- * As Modernizr suggests (http://modernizr.com/docs/#prefixed), an `ms` prefix
- * is converted to `-ms-`.
- *
- * @param {string} string
- * @return {string}
- */
-function hyphenateStyleName(string) {
-  return hyphenate(string).replace(msPattern, '-ms-');
-}
-
-module.exports = hyphenateStyleName;
-
-/***/ }),
-
-/***/ "./node_modules/fbjs/lib/memoizeStringOnly.js":
-/*!****************************************************!*\
-  !*** ./node_modules/fbjs/lib/memoizeStringOnly.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * 
- * @typechecks static-only
- */
-
-
-
-/**
- * Memoizes the return value of a function that accepts one string argument.
- */
-
-function memoizeStringOnly(callback) {
-  var cache = {};
-  return function (string) {
-    if (!cache.hasOwnProperty(string)) {
-      cache[string] = callback.call(this, string);
-    }
-    return cache[string];
-  };
-}
-
-module.exports = memoizeStringOnly;
-
-/***/ }),
-
-/***/ "./node_modules/fbjs/lib/warning.js":
-/*!******************************************!*\
-  !*** ./node_modules/fbjs/lib/warning.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-
-
-var emptyFunction = __webpack_require__(/*! ./emptyFunction */ "./node_modules/fbjs/lib/emptyFunction.js");
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var warning = emptyFunction;
-
-if (true) {
-  var printWarning = function printWarning(format) {
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    var argIndex = 0;
-    var message = 'Warning: ' + format.replace(/%s/g, function () {
-      return args[argIndex++];
-    });
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-
-  warning = function warning(condition, format) {
-    if (format === undefined) {
-      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-    }
-
-    if (format.indexOf('Failed Composite propType: ') === 0) {
-      return; // Ignore CompositeComponent proptype check.
-    }
-
-    if (!condition) {
-      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-        args[_key2 - 2] = arguments[_key2];
-      }
-
-      printWarning.apply(undefined, [format].concat(args));
-    }
-  };
-}
-
-module.exports = warning;
 
 /***/ }),
 
@@ -8238,571 +4869,6 @@ var bind = __webpack_require__(/*! function-bind */ "./node_modules/function-bin
 
 module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
 
-
-/***/ }),
-
-/***/ "./node_modules/hyphenate-style-name/index.js":
-/*!****************************************************!*\
-  !*** ./node_modules/hyphenate-style-name/index.js ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* eslint-disable no-var, prefer-template */
-var uppercasePattern = /[A-Z]/g
-var msPattern = /^ms-/
-var cache = {}
-
-function toHyphenLower(match) {
-  return '-' + match.toLowerCase()
-}
-
-function hyphenateStyleName(name) {
-  if (cache.hasOwnProperty(name)) {
-    return cache[name]
-  }
-
-  var hName = name.replace(uppercasePattern, toHyphenLower)
-  return (cache[name] = msPattern.test(hName) ? '-' + hName : hName)
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (hyphenateStyleName);
-
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/plugins/crossFade.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/plugins/crossFade.js ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = crossFade;
-
-var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ "./node_modules/css-in-js-utils/lib/isPrefixedValue.js");
-
-var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// http://caniuse.com/#search=cross-fade
-var prefixes = ['-webkit-', ''];
-function crossFade(property, value) {
-  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && value.indexOf('cross-fade(') > -1) {
-    return prefixes.map(function (prefix) {
-      return value.replace(/cross-fade\(/g, prefix + 'cross-fade(');
-    });
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/plugins/cursor.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/plugins/cursor.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = cursor;
-var prefixes = ['-webkit-', '-moz-', ''];
-
-var values = {
-  'zoom-in': true,
-  'zoom-out': true,
-  grab: true,
-  grabbing: true
-};
-
-function cursor(property, value) {
-  if (property === 'cursor' && values.hasOwnProperty(value)) {
-    return prefixes.map(function (prefix) {
-      return prefix + value;
-    });
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/plugins/filter.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/plugins/filter.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = filter;
-
-var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ "./node_modules/css-in-js-utils/lib/isPrefixedValue.js");
-
-var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// http://caniuse.com/#feat=css-filter-function
-var prefixes = ['-webkit-', ''];
-function filter(property, value) {
-  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && value.indexOf('filter(') > -1) {
-    return prefixes.map(function (prefix) {
-      return value.replace(/filter\(/g, prefix + 'filter(');
-    });
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/plugins/flex.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/plugins/flex.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = flex;
-var values = {
-  flex: ['-webkit-box', '-moz-box', '-ms-flexbox', '-webkit-flex', 'flex'],
-  'inline-flex': ['-webkit-inline-box', '-moz-inline-box', '-ms-inline-flexbox', '-webkit-inline-flex', 'inline-flex']
-};
-
-function flex(property, value) {
-  if (property === 'display' && values.hasOwnProperty(value)) {
-    return values[value];
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/plugins/flexboxOld.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/plugins/flexboxOld.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = flexboxOld;
-var alternativeValues = {
-  'space-around': 'justify',
-  'space-between': 'justify',
-  'flex-start': 'start',
-  'flex-end': 'end',
-  'wrap-reverse': 'multiple',
-  wrap: 'multiple'
-};
-
-var alternativeProps = {
-  alignItems: 'WebkitBoxAlign',
-  justifyContent: 'WebkitBoxPack',
-  flexWrap: 'WebkitBoxLines'
-};
-
-function flexboxOld(property, value, style) {
-  if (property === 'flexDirection' && typeof value === 'string') {
-    if (value.indexOf('column') > -1) {
-      style.WebkitBoxOrient = 'vertical';
-    } else {
-      style.WebkitBoxOrient = 'horizontal';
-    }
-    if (value.indexOf('reverse') > -1) {
-      style.WebkitBoxDirection = 'reverse';
-    } else {
-      style.WebkitBoxDirection = 'normal';
-    }
-  }
-  if (alternativeProps.hasOwnProperty(property)) {
-    style[alternativeProps[property]] = alternativeValues[value] || value;
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/plugins/gradient.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/plugins/gradient.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = gradient;
-
-var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ "./node_modules/css-in-js-utils/lib/isPrefixedValue.js");
-
-var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var prefixes = ['-webkit-', '-moz-', ''];
-
-var values = /linear-gradient|radial-gradient|repeating-linear-gradient|repeating-radial-gradient/;
-
-function gradient(property, value) {
-  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && values.test(value)) {
-    return prefixes.map(function (prefix) {
-      return prefix + value;
-    });
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/plugins/imageSet.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/plugins/imageSet.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = imageSet;
-
-var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ "./node_modules/css-in-js-utils/lib/isPrefixedValue.js");
-
-var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// http://caniuse.com/#feat=css-image-set
-var prefixes = ['-webkit-', ''];
-function imageSet(property, value) {
-  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && value.indexOf('image-set(') > -1) {
-    return prefixes.map(function (prefix) {
-      return value.replace(/image-set\(/g, prefix + 'image-set(');
-    });
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/plugins/position.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/plugins/position.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = position;
-function position(property, value) {
-  if (property === 'position' && value === 'sticky') {
-    return ['-webkit-sticky', 'sticky'];
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/plugins/sizing.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/plugins/sizing.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = sizing;
-var prefixes = ['-webkit-', '-moz-', ''];
-
-var properties = {
-  maxHeight: true,
-  maxWidth: true,
-  width: true,
-  height: true,
-  columnWidth: true,
-  minWidth: true,
-  minHeight: true
-};
-var values = {
-  'min-content': true,
-  'max-content': true,
-  'fill-available': true,
-  'fit-content': true,
-  'contain-floats': true
-};
-
-function sizing(property, value) {
-  if (properties.hasOwnProperty(property) && values.hasOwnProperty(value)) {
-    return prefixes.map(function (prefix) {
-      return prefix + value;
-    });
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/plugins/transition.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/plugins/transition.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = transition;
-
-var _hyphenateProperty = __webpack_require__(/*! css-in-js-utils/lib/hyphenateProperty */ "./node_modules/css-in-js-utils/lib/hyphenateProperty.js");
-
-var _hyphenateProperty2 = _interopRequireDefault(_hyphenateProperty);
-
-var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ "./node_modules/css-in-js-utils/lib/isPrefixedValue.js");
-
-var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
-var _capitalizeString = __webpack_require__(/*! ../../utils/capitalizeString */ "./node_modules/inline-style-prefixer/utils/capitalizeString.js");
-
-var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var properties = {
-  transition: true,
-  transitionProperty: true,
-  WebkitTransition: true,
-  WebkitTransitionProperty: true,
-  MozTransition: true,
-  MozTransitionProperty: true
-};
-
-
-var prefixMapping = {
-  Webkit: '-webkit-',
-  Moz: '-moz-',
-  ms: '-ms-'
-};
-
-function prefixValue(value, propertyPrefixMap) {
-  if ((0, _isPrefixedValue2.default)(value)) {
-    return value;
-  }
-
-  // only split multi values, not cubic beziers
-  var multipleValues = value.split(/,(?![^()]*(?:\([^()]*\))?\))/g);
-
-  for (var i = 0, len = multipleValues.length; i < len; ++i) {
-    var singleValue = multipleValues[i];
-    var values = [singleValue];
-    for (var property in propertyPrefixMap) {
-      var dashCaseProperty = (0, _hyphenateProperty2.default)(property);
-
-      if (singleValue.indexOf(dashCaseProperty) > -1 && dashCaseProperty !== 'order') {
-        var prefixes = propertyPrefixMap[property];
-        for (var j = 0, pLen = prefixes.length; j < pLen; ++j) {
-          // join all prefixes and create a new value
-          values.unshift(singleValue.replace(dashCaseProperty, prefixMapping[prefixes[j]] + dashCaseProperty));
-        }
-      }
-    }
-
-    multipleValues[i] = values.join(',');
-  }
-
-  return multipleValues.join(',');
-}
-
-function transition(property, value, style, propertyPrefixMap) {
-  // also check for already prefixed transitions
-  if (typeof value === 'string' && properties.hasOwnProperty(property)) {
-    var outputValue = prefixValue(value, propertyPrefixMap);
-    // if the property is already prefixed
-    var webkitOutput = outputValue.split(/,(?![^()]*(?:\([^()]*\))?\))/g).filter(function (val) {
-      return !/-moz-|-ms-/.test(val);
-    }).join(',');
-
-    if (property.indexOf('Webkit') > -1) {
-      return webkitOutput;
-    }
-
-    var mozOutput = outputValue.split(/,(?![^()]*(?:\([^()]*\))?\))/g).filter(function (val) {
-      return !/-webkit-|-ms-/.test(val);
-    }).join(',');
-
-    if (property.indexOf('Moz') > -1) {
-      return mozOutput;
-    }
-
-    style['Webkit' + (0, _capitalizeString2.default)(property)] = webkitOutput;
-    style['Moz' + (0, _capitalizeString2.default)(property)] = mozOutput;
-    return outputValue;
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/static/staticData.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/static/staticData.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var w = ["Webkit"];
-var m = ["Moz"];
-var ms = ["ms"];
-var wm = ["Webkit", "Moz"];
-var wms = ["Webkit", "ms"];
-var wmms = ["Webkit", "Moz", "ms"];
-
-exports.default = {
-  plugins: [],
-  prefixMap: { "appearance": wm, "userSelect": wmms, "textEmphasisPosition": w, "textEmphasis": w, "textEmphasisStyle": w, "textEmphasisColor": w, "boxDecorationBreak": w, "clipPath": w, "maskImage": w, "maskMode": w, "maskRepeat": w, "maskPosition": w, "maskClip": w, "maskOrigin": w, "maskSize": w, "maskComposite": w, "mask": w, "maskBorderSource": w, "maskBorderMode": w, "maskBorderSlice": w, "maskBorderWidth": w, "maskBorderOutset": w, "maskBorderRepeat": w, "maskBorder": w, "maskType": w, "textDecorationStyle": w, "textDecorationSkip": w, "textDecorationLine": w, "textDecorationColor": w, "filter": w, "fontFeatureSettings": w, "breakAfter": wmms, "breakBefore": wmms, "breakInside": wmms, "columnCount": wm, "columnFill": wm, "columnGap": wm, "columnRule": wm, "columnRuleColor": wm, "columnRuleStyle": wm, "columnRuleWidth": wm, "columns": wm, "columnSpan": wm, "columnWidth": wm, "writingMode": wms, "flex": w, "flexBasis": w, "flexDirection": w, "flexGrow": w, "flexFlow": w, "flexShrink": w, "flexWrap": w, "alignContent": w, "alignItems": w, "alignSelf": w, "justifyContent": w, "order": w, "transform": w, "transformOrigin": w, "transformOriginX": w, "transformOriginY": w, "backfaceVisibility": w, "perspective": w, "perspectiveOrigin": w, "transformStyle": w, "transformOriginZ": w, "animation": w, "animationDelay": w, "animationDirection": w, "animationFillMode": w, "animationDuration": w, "animationIterationCount": w, "animationName": w, "animationPlayState": w, "animationTimingFunction": w, "backdropFilter": w, "fontKerning": w, "scrollSnapType": wms, "scrollSnapPointsX": wms, "scrollSnapPointsY": wms, "scrollSnapDestination": wms, "scrollSnapCoordinate": wms, "shapeImageThreshold": w, "shapeImageMargin": w, "shapeImageOutside": w, "hyphens": wmms, "flowInto": wms, "flowFrom": wms, "regionFragment": wms, "textAlignLast": m, "tabSize": m, "wrapFlow": ms, "wrapThrough": ms, "wrapMargin": ms, "gridTemplateColumns": ms, "gridTemplateRows": ms, "gridTemplateAreas": ms, "gridTemplate": ms, "gridAutoColumns": ms, "gridAutoRows": ms, "gridAutoFlow": ms, "grid": ms, "gridRowStart": ms, "gridColumnStart": ms, "gridRowEnd": ms, "gridRow": ms, "gridColumn": ms, "gridColumnEnd": ms, "gridColumnGap": ms, "gridRowGap": ms, "gridArea": ms, "gridGap": ms, "textSizeAdjust": wms, "borderImage": w, "borderImageOutset": w, "borderImageRepeat": w, "borderImageSlice": w, "borderImageSource": w, "borderImageWidth": w, "transitionDelay": w, "transitionDuration": w, "transitionProperty": w, "transitionTimingFunction": w }
-};
-module.exports = exports["default"];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/utils/capitalizeString.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/utils/capitalizeString.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = capitalizeString;
-function capitalizeString(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-module.exports = exports["default"];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/utils/prefixProperty.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/utils/prefixProperty.js ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = prefixProperty;
-
-var _capitalizeString = __webpack_require__(/*! ./capitalizeString */ "./node_modules/inline-style-prefixer/utils/capitalizeString.js");
-
-var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function prefixProperty(prefixProperties, property, style) {
-  if (prefixProperties.hasOwnProperty(property)) {
-    var requiredPrefixes = prefixProperties[property];
-    for (var i = 0, len = requiredPrefixes.length; i < len; ++i) {
-      style[requiredPrefixes[i] + (0, _capitalizeString2.default)(property)] = style[property];
-    }
-  }
-}
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ "./node_modules/inline-style-prefixer/utils/prefixValue.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/inline-style-prefixer/utils/prefixValue.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = prefixValue;
-function prefixValue(plugins, property, value, style, metaData) {
-  for (var i = 0, len = plugins.length; i < len; ++i) {
-    var processedValue = plugins[i](property, value, style, metaData);
-
-    // we can stop processing if a value is returned
-    // as all plugin criteria are unique
-    if (processedValue) {
-      return processedValue;
-    }
-  }
-}
-module.exports = exports["default"];
 
 /***/ }),
 
@@ -11005,537 +7071,6 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 /***/ }),
 
-/***/ "./node_modules/node-libs-browser/node_modules/punycode/punycode.js":
-/*!**************************************************************************!*\
-  !*** ./node_modules/node-libs-browser/node_modules/punycode/punycode.js ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
-;(function(root) {
-
-	/** Detect free variables */
-	var freeExports =  true && exports &&
-		!exports.nodeType && exports;
-	var freeModule =  true && module &&
-		!module.nodeType && module;
-	var freeGlobal = typeof global == 'object' && global;
-	if (
-		freeGlobal.global === freeGlobal ||
-		freeGlobal.window === freeGlobal ||
-		freeGlobal.self === freeGlobal
-	) {
-		root = freeGlobal;
-	}
-
-	/**
-	 * The `punycode` object.
-	 * @name punycode
-	 * @type Object
-	 */
-	var punycode,
-
-	/** Highest positive signed 32-bit float value */
-	maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
-
-	/** Bootstring parameters */
-	base = 36,
-	tMin = 1,
-	tMax = 26,
-	skew = 38,
-	damp = 700,
-	initialBias = 72,
-	initialN = 128, // 0x80
-	delimiter = '-', // '\x2D'
-
-	/** Regular expressions */
-	regexPunycode = /^xn--/,
-	regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
-	regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
-
-	/** Error messages */
-	errors = {
-		'overflow': 'Overflow: input needs wider integers to process',
-		'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
-		'invalid-input': 'Invalid input'
-	},
-
-	/** Convenience shortcuts */
-	baseMinusTMin = base - tMin,
-	floor = Math.floor,
-	stringFromCharCode = String.fromCharCode,
-
-	/** Temporary variable */
-	key;
-
-	/*--------------------------------------------------------------------------*/
-
-	/**
-	 * A generic error utility function.
-	 * @private
-	 * @param {String} type The error type.
-	 * @returns {Error} Throws a `RangeError` with the applicable error message.
-	 */
-	function error(type) {
-		throw new RangeError(errors[type]);
-	}
-
-	/**
-	 * A generic `Array#map` utility function.
-	 * @private
-	 * @param {Array} array The array to iterate over.
-	 * @param {Function} callback The function that gets called for every array
-	 * item.
-	 * @returns {Array} A new array of values returned by the callback function.
-	 */
-	function map(array, fn) {
-		var length = array.length;
-		var result = [];
-		while (length--) {
-			result[length] = fn(array[length]);
-		}
-		return result;
-	}
-
-	/**
-	 * A simple `Array#map`-like wrapper to work with domain name strings or email
-	 * addresses.
-	 * @private
-	 * @param {String} domain The domain name or email address.
-	 * @param {Function} callback The function that gets called for every
-	 * character.
-	 * @returns {Array} A new string of characters returned by the callback
-	 * function.
-	 */
-	function mapDomain(string, fn) {
-		var parts = string.split('@');
-		var result = '';
-		if (parts.length > 1) {
-			// In email addresses, only the domain name should be punycoded. Leave
-			// the local part (i.e. everything up to `@`) intact.
-			result = parts[0] + '@';
-			string = parts[1];
-		}
-		// Avoid `split(regex)` for IE8 compatibility. See #17.
-		string = string.replace(regexSeparators, '\x2E');
-		var labels = string.split('.');
-		var encoded = map(labels, fn).join('.');
-		return result + encoded;
-	}
-
-	/**
-	 * Creates an array containing the numeric code points of each Unicode
-	 * character in the string. While JavaScript uses UCS-2 internally,
-	 * this function will convert a pair of surrogate halves (each of which
-	 * UCS-2 exposes as separate characters) into a single code point,
-	 * matching UTF-16.
-	 * @see `punycode.ucs2.encode`
-	 * @see <https://mathiasbynens.be/notes/javascript-encoding>
-	 * @memberOf punycode.ucs2
-	 * @name decode
-	 * @param {String} string The Unicode input string (UCS-2).
-	 * @returns {Array} The new array of code points.
-	 */
-	function ucs2decode(string) {
-		var output = [],
-		    counter = 0,
-		    length = string.length,
-		    value,
-		    extra;
-		while (counter < length) {
-			value = string.charCodeAt(counter++);
-			if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
-				// high surrogate, and there is a next character
-				extra = string.charCodeAt(counter++);
-				if ((extra & 0xFC00) == 0xDC00) { // low surrogate
-					output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
-				} else {
-					// unmatched surrogate; only append this code unit, in case the next
-					// code unit is the high surrogate of a surrogate pair
-					output.push(value);
-					counter--;
-				}
-			} else {
-				output.push(value);
-			}
-		}
-		return output;
-	}
-
-	/**
-	 * Creates a string based on an array of numeric code points.
-	 * @see `punycode.ucs2.decode`
-	 * @memberOf punycode.ucs2
-	 * @name encode
-	 * @param {Array} codePoints The array of numeric code points.
-	 * @returns {String} The new Unicode string (UCS-2).
-	 */
-	function ucs2encode(array) {
-		return map(array, function(value) {
-			var output = '';
-			if (value > 0xFFFF) {
-				value -= 0x10000;
-				output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
-				value = 0xDC00 | value & 0x3FF;
-			}
-			output += stringFromCharCode(value);
-			return output;
-		}).join('');
-	}
-
-	/**
-	 * Converts a basic code point into a digit/integer.
-	 * @see `digitToBasic()`
-	 * @private
-	 * @param {Number} codePoint The basic numeric code point value.
-	 * @returns {Number} The numeric value of a basic code point (for use in
-	 * representing integers) in the range `0` to `base - 1`, or `base` if
-	 * the code point does not represent a value.
-	 */
-	function basicToDigit(codePoint) {
-		if (codePoint - 48 < 10) {
-			return codePoint - 22;
-		}
-		if (codePoint - 65 < 26) {
-			return codePoint - 65;
-		}
-		if (codePoint - 97 < 26) {
-			return codePoint - 97;
-		}
-		return base;
-	}
-
-	/**
-	 * Converts a digit/integer into a basic code point.
-	 * @see `basicToDigit()`
-	 * @private
-	 * @param {Number} digit The numeric value of a basic code point.
-	 * @returns {Number} The basic code point whose value (when used for
-	 * representing integers) is `digit`, which needs to be in the range
-	 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
-	 * used; else, the lowercase form is used. The behavior is undefined
-	 * if `flag` is non-zero and `digit` has no uppercase form.
-	 */
-	function digitToBasic(digit, flag) {
-		//  0..25 map to ASCII a..z or A..Z
-		// 26..35 map to ASCII 0..9
-		return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
-	}
-
-	/**
-	 * Bias adaptation function as per section 3.4 of RFC 3492.
-	 * https://tools.ietf.org/html/rfc3492#section-3.4
-	 * @private
-	 */
-	function adapt(delta, numPoints, firstTime) {
-		var k = 0;
-		delta = firstTime ? floor(delta / damp) : delta >> 1;
-		delta += floor(delta / numPoints);
-		for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
-			delta = floor(delta / baseMinusTMin);
-		}
-		return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
-	}
-
-	/**
-	 * Converts a Punycode string of ASCII-only symbols to a string of Unicode
-	 * symbols.
-	 * @memberOf punycode
-	 * @param {String} input The Punycode string of ASCII-only symbols.
-	 * @returns {String} The resulting string of Unicode symbols.
-	 */
-	function decode(input) {
-		// Don't use UCS-2
-		var output = [],
-		    inputLength = input.length,
-		    out,
-		    i = 0,
-		    n = initialN,
-		    bias = initialBias,
-		    basic,
-		    j,
-		    index,
-		    oldi,
-		    w,
-		    k,
-		    digit,
-		    t,
-		    /** Cached calculation results */
-		    baseMinusT;
-
-		// Handle the basic code points: let `basic` be the number of input code
-		// points before the last delimiter, or `0` if there is none, then copy
-		// the first basic code points to the output.
-
-		basic = input.lastIndexOf(delimiter);
-		if (basic < 0) {
-			basic = 0;
-		}
-
-		for (j = 0; j < basic; ++j) {
-			// if it's not a basic code point
-			if (input.charCodeAt(j) >= 0x80) {
-				error('not-basic');
-			}
-			output.push(input.charCodeAt(j));
-		}
-
-		// Main decoding loop: start just after the last delimiter if any basic code
-		// points were copied; start at the beginning otherwise.
-
-		for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
-
-			// `index` is the index of the next character to be consumed.
-			// Decode a generalized variable-length integer into `delta`,
-			// which gets added to `i`. The overflow checking is easier
-			// if we increase `i` as we go, then subtract off its starting
-			// value at the end to obtain `delta`.
-			for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
-
-				if (index >= inputLength) {
-					error('invalid-input');
-				}
-
-				digit = basicToDigit(input.charCodeAt(index++));
-
-				if (digit >= base || digit > floor((maxInt - i) / w)) {
-					error('overflow');
-				}
-
-				i += digit * w;
-				t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
-
-				if (digit < t) {
-					break;
-				}
-
-				baseMinusT = base - t;
-				if (w > floor(maxInt / baseMinusT)) {
-					error('overflow');
-				}
-
-				w *= baseMinusT;
-
-			}
-
-			out = output.length + 1;
-			bias = adapt(i - oldi, out, oldi == 0);
-
-			// `i` was supposed to wrap around from `out` to `0`,
-			// incrementing `n` each time, so we'll fix that now:
-			if (floor(i / out) > maxInt - n) {
-				error('overflow');
-			}
-
-			n += floor(i / out);
-			i %= out;
-
-			// Insert `n` at position `i` of the output
-			output.splice(i++, 0, n);
-
-		}
-
-		return ucs2encode(output);
-	}
-
-	/**
-	 * Converts a string of Unicode symbols (e.g. a domain name label) to a
-	 * Punycode string of ASCII-only symbols.
-	 * @memberOf punycode
-	 * @param {String} input The string of Unicode symbols.
-	 * @returns {String} The resulting Punycode string of ASCII-only symbols.
-	 */
-	function encode(input) {
-		var n,
-		    delta,
-		    handledCPCount,
-		    basicLength,
-		    bias,
-		    j,
-		    m,
-		    q,
-		    k,
-		    t,
-		    currentValue,
-		    output = [],
-		    /** `inputLength` will hold the number of code points in `input`. */
-		    inputLength,
-		    /** Cached calculation results */
-		    handledCPCountPlusOne,
-		    baseMinusT,
-		    qMinusT;
-
-		// Convert the input in UCS-2 to Unicode
-		input = ucs2decode(input);
-
-		// Cache the length
-		inputLength = input.length;
-
-		// Initialize the state
-		n = initialN;
-		delta = 0;
-		bias = initialBias;
-
-		// Handle the basic code points
-		for (j = 0; j < inputLength; ++j) {
-			currentValue = input[j];
-			if (currentValue < 0x80) {
-				output.push(stringFromCharCode(currentValue));
-			}
-		}
-
-		handledCPCount = basicLength = output.length;
-
-		// `handledCPCount` is the number of code points that have been handled;
-		// `basicLength` is the number of basic code points.
-
-		// Finish the basic string - if it is not empty - with a delimiter
-		if (basicLength) {
-			output.push(delimiter);
-		}
-
-		// Main encoding loop:
-		while (handledCPCount < inputLength) {
-
-			// All non-basic code points < n have been handled already. Find the next
-			// larger one:
-			for (m = maxInt, j = 0; j < inputLength; ++j) {
-				currentValue = input[j];
-				if (currentValue >= n && currentValue < m) {
-					m = currentValue;
-				}
-			}
-
-			// Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
-			// but guard against overflow
-			handledCPCountPlusOne = handledCPCount + 1;
-			if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
-				error('overflow');
-			}
-
-			delta += (m - n) * handledCPCountPlusOne;
-			n = m;
-
-			for (j = 0; j < inputLength; ++j) {
-				currentValue = input[j];
-
-				if (currentValue < n && ++delta > maxInt) {
-					error('overflow');
-				}
-
-				if (currentValue == n) {
-					// Represent delta as a generalized variable-length integer
-					for (q = delta, k = base; /* no condition */; k += base) {
-						t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
-						if (q < t) {
-							break;
-						}
-						qMinusT = q - t;
-						baseMinusT = base - t;
-						output.push(
-							stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0))
-						);
-						q = floor(qMinusT / baseMinusT);
-					}
-
-					output.push(stringFromCharCode(digitToBasic(q, 0)));
-					bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
-					delta = 0;
-					++handledCPCount;
-				}
-			}
-
-			++delta;
-			++n;
-
-		}
-		return output.join('');
-	}
-
-	/**
-	 * Converts a Punycode string representing a domain name or an email address
-	 * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
-	 * it doesn't matter if you call it on a string that has already been
-	 * converted to Unicode.
-	 * @memberOf punycode
-	 * @param {String} input The Punycoded domain name or email address to
-	 * convert to Unicode.
-	 * @returns {String} The Unicode representation of the given Punycode
-	 * string.
-	 */
-	function toUnicode(input) {
-		return mapDomain(input, function(string) {
-			return regexPunycode.test(string)
-				? decode(string.slice(4).toLowerCase())
-				: string;
-		});
-	}
-
-	/**
-	 * Converts a Unicode string representing a domain name or an email address to
-	 * Punycode. Only the non-ASCII parts of the domain name will be converted,
-	 * i.e. it doesn't matter if you call it with a domain that's already in
-	 * ASCII.
-	 * @memberOf punycode
-	 * @param {String} input The domain name or email address to convert, as a
-	 * Unicode string.
-	 * @returns {String} The Punycode representation of the given domain name or
-	 * email address.
-	 */
-	function toASCII(input) {
-		return mapDomain(input, function(string) {
-			return regexNonASCII.test(string)
-				? 'xn--' + encode(string)
-				: string;
-		});
-	}
-
-	/*--------------------------------------------------------------------------*/
-
-	/** Define the public API */
-	punycode = {
-		/**
-		 * A string representing the current Punycode.js version number.
-		 * @memberOf punycode
-		 * @type String
-		 */
-		'version': '1.4.1',
-		/**
-		 * An object of methods to convert from JavaScript's internal character
-		 * representation (UCS-2) to Unicode code points, and back.
-		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
-		 * @memberOf punycode
-		 * @type Object
-		 */
-		'ucs2': {
-			'decode': ucs2decode,
-			'encode': ucs2encode
-		},
-		'decode': decode,
-		'encode': encode,
-		'toASCII': toASCII,
-		'toUnicode': toUnicode
-	};
-
-	/** Expose `punycode` */
-	// Some AMD build optimizers, like r.js, check for specific condition patterns
-	// like the following:
-	if (
-		true
-	) {
-		!(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
-			return punycode;
-		}).call(exports, __webpack_require__, exports, module),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
-
-}(this));
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module), __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
-
-/***/ }),
-
 /***/ "./node_modules/object-assign/index.js":
 /*!***************************************************************************************************!*\
   !*** delegated ./node_modules/object-assign/index.js from dll-reference dll_7aff549c98b978433226 ***!
@@ -12662,6 +8197,537 @@ if (true) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(/*! dll-reference dll_7aff549c98b978433226 */ "dll-reference dll_7aff549c98b978433226"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
+
+/***/ }),
+
+/***/ "./node_modules/punycode/punycode.js":
+/*!*******************************************!*\
+  !*** ./node_modules/punycode/punycode.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.3.2 by @mathias */
+;(function(root) {
+
+	/** Detect free variables */
+	var freeExports =  true && exports &&
+		!exports.nodeType && exports;
+	var freeModule =  true && module &&
+		!module.nodeType && module;
+	var freeGlobal = typeof global == 'object' && global;
+	if (
+		freeGlobal.global === freeGlobal ||
+		freeGlobal.window === freeGlobal ||
+		freeGlobal.self === freeGlobal
+	) {
+		root = freeGlobal;
+	}
+
+	/**
+	 * The `punycode` object.
+	 * @name punycode
+	 * @type Object
+	 */
+	var punycode,
+
+	/** Highest positive signed 32-bit float value */
+	maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
+
+	/** Bootstring parameters */
+	base = 36,
+	tMin = 1,
+	tMax = 26,
+	skew = 38,
+	damp = 700,
+	initialBias = 72,
+	initialN = 128, // 0x80
+	delimiter = '-', // '\x2D'
+
+	/** Regular expressions */
+	regexPunycode = /^xn--/,
+	regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
+	regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
+
+	/** Error messages */
+	errors = {
+		'overflow': 'Overflow: input needs wider integers to process',
+		'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
+		'invalid-input': 'Invalid input'
+	},
+
+	/** Convenience shortcuts */
+	baseMinusTMin = base - tMin,
+	floor = Math.floor,
+	stringFromCharCode = String.fromCharCode,
+
+	/** Temporary variable */
+	key;
+
+	/*--------------------------------------------------------------------------*/
+
+	/**
+	 * A generic error utility function.
+	 * @private
+	 * @param {String} type The error type.
+	 * @returns {Error} Throws a `RangeError` with the applicable error message.
+	 */
+	function error(type) {
+		throw RangeError(errors[type]);
+	}
+
+	/**
+	 * A generic `Array#map` utility function.
+	 * @private
+	 * @param {Array} array The array to iterate over.
+	 * @param {Function} callback The function that gets called for every array
+	 * item.
+	 * @returns {Array} A new array of values returned by the callback function.
+	 */
+	function map(array, fn) {
+		var length = array.length;
+		var result = [];
+		while (length--) {
+			result[length] = fn(array[length]);
+		}
+		return result;
+	}
+
+	/**
+	 * A simple `Array#map`-like wrapper to work with domain name strings or email
+	 * addresses.
+	 * @private
+	 * @param {String} domain The domain name or email address.
+	 * @param {Function} callback The function that gets called for every
+	 * character.
+	 * @returns {Array} A new string of characters returned by the callback
+	 * function.
+	 */
+	function mapDomain(string, fn) {
+		var parts = string.split('@');
+		var result = '';
+		if (parts.length > 1) {
+			// In email addresses, only the domain name should be punycoded. Leave
+			// the local part (i.e. everything up to `@`) intact.
+			result = parts[0] + '@';
+			string = parts[1];
+		}
+		// Avoid `split(regex)` for IE8 compatibility. See #17.
+		string = string.replace(regexSeparators, '\x2E');
+		var labels = string.split('.');
+		var encoded = map(labels, fn).join('.');
+		return result + encoded;
+	}
+
+	/**
+	 * Creates an array containing the numeric code points of each Unicode
+	 * character in the string. While JavaScript uses UCS-2 internally,
+	 * this function will convert a pair of surrogate halves (each of which
+	 * UCS-2 exposes as separate characters) into a single code point,
+	 * matching UTF-16.
+	 * @see `punycode.ucs2.encode`
+	 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+	 * @memberOf punycode.ucs2
+	 * @name decode
+	 * @param {String} string The Unicode input string (UCS-2).
+	 * @returns {Array} The new array of code points.
+	 */
+	function ucs2decode(string) {
+		var output = [],
+		    counter = 0,
+		    length = string.length,
+		    value,
+		    extra;
+		while (counter < length) {
+			value = string.charCodeAt(counter++);
+			if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
+				// high surrogate, and there is a next character
+				extra = string.charCodeAt(counter++);
+				if ((extra & 0xFC00) == 0xDC00) { // low surrogate
+					output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
+				} else {
+					// unmatched surrogate; only append this code unit, in case the next
+					// code unit is the high surrogate of a surrogate pair
+					output.push(value);
+					counter--;
+				}
+			} else {
+				output.push(value);
+			}
+		}
+		return output;
+	}
+
+	/**
+	 * Creates a string based on an array of numeric code points.
+	 * @see `punycode.ucs2.decode`
+	 * @memberOf punycode.ucs2
+	 * @name encode
+	 * @param {Array} codePoints The array of numeric code points.
+	 * @returns {String} The new Unicode string (UCS-2).
+	 */
+	function ucs2encode(array) {
+		return map(array, function(value) {
+			var output = '';
+			if (value > 0xFFFF) {
+				value -= 0x10000;
+				output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
+				value = 0xDC00 | value & 0x3FF;
+			}
+			output += stringFromCharCode(value);
+			return output;
+		}).join('');
+	}
+
+	/**
+	 * Converts a basic code point into a digit/integer.
+	 * @see `digitToBasic()`
+	 * @private
+	 * @param {Number} codePoint The basic numeric code point value.
+	 * @returns {Number} The numeric value of a basic code point (for use in
+	 * representing integers) in the range `0` to `base - 1`, or `base` if
+	 * the code point does not represent a value.
+	 */
+	function basicToDigit(codePoint) {
+		if (codePoint - 48 < 10) {
+			return codePoint - 22;
+		}
+		if (codePoint - 65 < 26) {
+			return codePoint - 65;
+		}
+		if (codePoint - 97 < 26) {
+			return codePoint - 97;
+		}
+		return base;
+	}
+
+	/**
+	 * Converts a digit/integer into a basic code point.
+	 * @see `basicToDigit()`
+	 * @private
+	 * @param {Number} digit The numeric value of a basic code point.
+	 * @returns {Number} The basic code point whose value (when used for
+	 * representing integers) is `digit`, which needs to be in the range
+	 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
+	 * used; else, the lowercase form is used. The behavior is undefined
+	 * if `flag` is non-zero and `digit` has no uppercase form.
+	 */
+	function digitToBasic(digit, flag) {
+		//  0..25 map to ASCII a..z or A..Z
+		// 26..35 map to ASCII 0..9
+		return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
+	}
+
+	/**
+	 * Bias adaptation function as per section 3.4 of RFC 3492.
+	 * http://tools.ietf.org/html/rfc3492#section-3.4
+	 * @private
+	 */
+	function adapt(delta, numPoints, firstTime) {
+		var k = 0;
+		delta = firstTime ? floor(delta / damp) : delta >> 1;
+		delta += floor(delta / numPoints);
+		for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
+			delta = floor(delta / baseMinusTMin);
+		}
+		return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
+	}
+
+	/**
+	 * Converts a Punycode string of ASCII-only symbols to a string of Unicode
+	 * symbols.
+	 * @memberOf punycode
+	 * @param {String} input The Punycode string of ASCII-only symbols.
+	 * @returns {String} The resulting string of Unicode symbols.
+	 */
+	function decode(input) {
+		// Don't use UCS-2
+		var output = [],
+		    inputLength = input.length,
+		    out,
+		    i = 0,
+		    n = initialN,
+		    bias = initialBias,
+		    basic,
+		    j,
+		    index,
+		    oldi,
+		    w,
+		    k,
+		    digit,
+		    t,
+		    /** Cached calculation results */
+		    baseMinusT;
+
+		// Handle the basic code points: let `basic` be the number of input code
+		// points before the last delimiter, or `0` if there is none, then copy
+		// the first basic code points to the output.
+
+		basic = input.lastIndexOf(delimiter);
+		if (basic < 0) {
+			basic = 0;
+		}
+
+		for (j = 0; j < basic; ++j) {
+			// if it's not a basic code point
+			if (input.charCodeAt(j) >= 0x80) {
+				error('not-basic');
+			}
+			output.push(input.charCodeAt(j));
+		}
+
+		// Main decoding loop: start just after the last delimiter if any basic code
+		// points were copied; start at the beginning otherwise.
+
+		for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
+
+			// `index` is the index of the next character to be consumed.
+			// Decode a generalized variable-length integer into `delta`,
+			// which gets added to `i`. The overflow checking is easier
+			// if we increase `i` as we go, then subtract off its starting
+			// value at the end to obtain `delta`.
+			for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
+
+				if (index >= inputLength) {
+					error('invalid-input');
+				}
+
+				digit = basicToDigit(input.charCodeAt(index++));
+
+				if (digit >= base || digit > floor((maxInt - i) / w)) {
+					error('overflow');
+				}
+
+				i += digit * w;
+				t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+
+				if (digit < t) {
+					break;
+				}
+
+				baseMinusT = base - t;
+				if (w > floor(maxInt / baseMinusT)) {
+					error('overflow');
+				}
+
+				w *= baseMinusT;
+
+			}
+
+			out = output.length + 1;
+			bias = adapt(i - oldi, out, oldi == 0);
+
+			// `i` was supposed to wrap around from `out` to `0`,
+			// incrementing `n` each time, so we'll fix that now:
+			if (floor(i / out) > maxInt - n) {
+				error('overflow');
+			}
+
+			n += floor(i / out);
+			i %= out;
+
+			// Insert `n` at position `i` of the output
+			output.splice(i++, 0, n);
+
+		}
+
+		return ucs2encode(output);
+	}
+
+	/**
+	 * Converts a string of Unicode symbols (e.g. a domain name label) to a
+	 * Punycode string of ASCII-only symbols.
+	 * @memberOf punycode
+	 * @param {String} input The string of Unicode symbols.
+	 * @returns {String} The resulting Punycode string of ASCII-only symbols.
+	 */
+	function encode(input) {
+		var n,
+		    delta,
+		    handledCPCount,
+		    basicLength,
+		    bias,
+		    j,
+		    m,
+		    q,
+		    k,
+		    t,
+		    currentValue,
+		    output = [],
+		    /** `inputLength` will hold the number of code points in `input`. */
+		    inputLength,
+		    /** Cached calculation results */
+		    handledCPCountPlusOne,
+		    baseMinusT,
+		    qMinusT;
+
+		// Convert the input in UCS-2 to Unicode
+		input = ucs2decode(input);
+
+		// Cache the length
+		inputLength = input.length;
+
+		// Initialize the state
+		n = initialN;
+		delta = 0;
+		bias = initialBias;
+
+		// Handle the basic code points
+		for (j = 0; j < inputLength; ++j) {
+			currentValue = input[j];
+			if (currentValue < 0x80) {
+				output.push(stringFromCharCode(currentValue));
+			}
+		}
+
+		handledCPCount = basicLength = output.length;
+
+		// `handledCPCount` is the number of code points that have been handled;
+		// `basicLength` is the number of basic code points.
+
+		// Finish the basic string - if it is not empty - with a delimiter
+		if (basicLength) {
+			output.push(delimiter);
+		}
+
+		// Main encoding loop:
+		while (handledCPCount < inputLength) {
+
+			// All non-basic code points < n have been handled already. Find the next
+			// larger one:
+			for (m = maxInt, j = 0; j < inputLength; ++j) {
+				currentValue = input[j];
+				if (currentValue >= n && currentValue < m) {
+					m = currentValue;
+				}
+			}
+
+			// Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
+			// but guard against overflow
+			handledCPCountPlusOne = handledCPCount + 1;
+			if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
+				error('overflow');
+			}
+
+			delta += (m - n) * handledCPCountPlusOne;
+			n = m;
+
+			for (j = 0; j < inputLength; ++j) {
+				currentValue = input[j];
+
+				if (currentValue < n && ++delta > maxInt) {
+					error('overflow');
+				}
+
+				if (currentValue == n) {
+					// Represent delta as a generalized variable-length integer
+					for (q = delta, k = base; /* no condition */; k += base) {
+						t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+						if (q < t) {
+							break;
+						}
+						qMinusT = q - t;
+						baseMinusT = base - t;
+						output.push(
+							stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0))
+						);
+						q = floor(qMinusT / baseMinusT);
+					}
+
+					output.push(stringFromCharCode(digitToBasic(q, 0)));
+					bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
+					delta = 0;
+					++handledCPCount;
+				}
+			}
+
+			++delta;
+			++n;
+
+		}
+		return output.join('');
+	}
+
+	/**
+	 * Converts a Punycode string representing a domain name or an email address
+	 * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
+	 * it doesn't matter if you call it on a string that has already been
+	 * converted to Unicode.
+	 * @memberOf punycode
+	 * @param {String} input The Punycoded domain name or email address to
+	 * convert to Unicode.
+	 * @returns {String} The Unicode representation of the given Punycode
+	 * string.
+	 */
+	function toUnicode(input) {
+		return mapDomain(input, function(string) {
+			return regexPunycode.test(string)
+				? decode(string.slice(4).toLowerCase())
+				: string;
+		});
+	}
+
+	/**
+	 * Converts a Unicode string representing a domain name or an email address to
+	 * Punycode. Only the non-ASCII parts of the domain name will be converted,
+	 * i.e. it doesn't matter if you call it with a domain that's already in
+	 * ASCII.
+	 * @memberOf punycode
+	 * @param {String} input The domain name or email address to convert, as a
+	 * Unicode string.
+	 * @returns {String} The Punycode representation of the given domain name or
+	 * email address.
+	 */
+	function toASCII(input) {
+		return mapDomain(input, function(string) {
+			return regexNonASCII.test(string)
+				? 'xn--' + encode(string)
+				: string;
+		});
+	}
+
+	/*--------------------------------------------------------------------------*/
+
+	/** Define the public API */
+	punycode = {
+		/**
+		 * A string representing the current Punycode.js version number.
+		 * @memberOf punycode
+		 * @type String
+		 */
+		'version': '1.3.2',
+		/**
+		 * An object of methods to convert from JavaScript's internal character
+		 * representation (UCS-2) to Unicode code points, and back.
+		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+		 * @memberOf punycode
+		 * @type Object
+		 */
+		'ucs2': {
+			'decode': ucs2decode,
+			'encode': ucs2encode
+		},
+		'decode': decode,
+		'encode': encode,
+		'toASCII': toASCII,
+		'toUnicode': toUnicode
+	};
+
+	/** Expose `punycode` */
+	// Some AMD build optimizers, like r.js, check for specific condition patterns
+	// like the following:
+	if (
+		true
+	) {
+		!(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+			return punycode;
+		}).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+
+}(this));
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module), __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -13909,7 +9975,7 @@ try {
 
 
 
-var punycode = __webpack_require__(/*! punycode */ "./node_modules/node-libs-browser/node_modules/punycode/punycode.js");
+var punycode = __webpack_require__(/*! punycode */ "./node_modules/punycode/punycode.js");
 var util = __webpack_require__(/*! ./util */ "./node_modules/url/util.js");
 
 exports.parse = urlParse;
@@ -14711,10 +10777,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/header */ "./components/header.js");
 /* harmony import */ var _components_video__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/video */ "./components/video.js");
-/* harmony import */ var _headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @headspace/web-styles/dist/components/container */ "./node_modules/@headspace/web-styles/dist/components/container.js");
-/* harmony import */ var _headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5__);
 var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/index.js";
-
 
 
 
@@ -14761,13 +10824,13 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     style: mainStyles,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 47
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 48
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14776,7 +10839,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 49
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14785,7 +10848,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 50
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14794,7 +10857,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 51
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14803,7 +10866,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 52
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14811,7 +10874,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     content: "image/jpeg",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 53
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14820,7 +10883,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 54
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14829,7 +10892,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 55
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -14837,22 +10900,22 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     content: "A shiny red apple with a bite taken out",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 56
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("style", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 57
     },
     __self: this
   }, "\n          body {\n            margin: 0px;\n          }\n        ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_video__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 63
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5__["Container"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       "z-index": "100",
       position: "absolute",
@@ -14863,13 +10926,13 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 64
     },
     __self: this
   }, "TEST TEST TEST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 74
     },
     __self: this
   }));
@@ -14877,7 +10940,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
 
 /***/ }),
 
-/***/ 0:
+/***/ 1:
 /*!***********************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fmichaelwrather%2Fdevelopment%2Fheadspace-sharing%2Fpages%2Findex.js ***!
   \***********************************************************************************************************************************************/
@@ -14900,5 +10963,5 @@ module.exports = dll_7aff549c98b978433226;
 
 /***/ })
 
-},[[0,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=index.js.map

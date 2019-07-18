@@ -17,10 +17,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/header */ "./components/header.js");
 /* harmony import */ var _components_video__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/video */ "./components/video.js");
-/* harmony import */ var _headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @headspace/web-styles/dist/components/container */ "./node_modules/@headspace/web-styles/dist/components/container.js");
-/* harmony import */ var _headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5__);
 var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/index.js";
-
 
 
 
@@ -67,13 +64,13 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     style: mainStyles,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 47
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 48
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -82,7 +79,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 49
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -91,7 +88,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 50
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -100,7 +97,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53
+      lineNumber: 51
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -109,7 +106,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 52
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -117,7 +114,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     content: "image/jpeg",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 53
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -126,7 +123,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 54
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -135,7 +132,7 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     "class": "next-head",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 55
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("meta", {
@@ -143,39 +140,39 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
     content: "A shiny red apple with a bite taken out",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 56
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("style", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 57
     },
     __self: this
   }, "\n          body {\n            margin: 0px;\n          }\n        ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_video__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 63
     },
     __self: this
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_headspace_web_styles_dist_components_container__WEBPACK_IMPORTED_MODULE_5__["Container"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       "z-index": "100",
       position: "absolute",
       top: "0px",
       left: "0px",
-      height: "100%",
+      height: "10%",
       width: "100%"
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 66
+      lineNumber: 64
     },
     __self: this
   }, "TEST TEST TEST"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_header__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 74
     },
     __self: this
   }));
@@ -184,4 +181,4 @@ var _jsxFileName = "/Users/michaelwrather/development/headspace-sharing/pages/in
 /***/ })
 
 })
-//# sourceMappingURL=index.js.7b600bc8d53810c52969.hot-update.js.map
+//# sourceMappingURL=index.js.738e042ad43fcbd39c70.hot-update.js.map
