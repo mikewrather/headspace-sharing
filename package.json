@@ -2,12 +2,16 @@
   "private": true,
   "scripts": {
     "now-build": "next build && next export -o dist",
-    "now-dev": "next -p $PORT"
+    "now-dev": "next -p $PORT",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
+    "@headspace/glamor": "^2.20.40",
     "@headspace/web-styles": "^4.3.6",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest"
+    "next": "^9.0.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }

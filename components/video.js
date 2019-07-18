@@ -1,15 +1,26 @@
 // new component syntax
-import { Container } from '@headspace/web-styles/components/container';
-import { Col } from '@headspace/web-styles/components/col';
+import { Container } from '@headspace/web-styles/dist/components/container';
+import { Col } from '@headspace/web-styles/dist/components/col';
 
 export default () => {
+    let videoStyle = {
+        width: '100%',
+        "object-fit": "contain"
+      };
   return (
-    <Container>
-      <Col s={4} m={6}>
-        Foo
-      </Col>
-      <Col s={4} m={6}>
-        Bar
+    <Container style={
+        {
+            padding: "0px",
+            margin: "0px",
+            height: "100%",
+            width: "100%",
+        }
+    }>
+      <Col>
+        <video style={videoStyle} controls autoPlay>
+            <source src="http://www.exit109.com/~dnn/clips/RW20seconds_2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
       </Col>
     </Container>
   )
