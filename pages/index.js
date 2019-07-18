@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Head from 'next/head'
 import Header from "../components/header";
+import Video from "../components/video";
 
 export default () => (
   <main>
@@ -15,10 +16,6 @@ export default () => (
       <meta property="og:image:alt" content="A shiny red apple with a bite taken out" />
     </Head>
     <Header />
-    <section>
-      <Link href="/about">
-        <a>Go to About Me</a>
-      </Link>
-    </section>
+    <Video />
   </main>
 );

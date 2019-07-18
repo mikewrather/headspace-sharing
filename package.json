@@ -5,6 +5,7 @@
     "now-dev": "next -p $PORT"
   },
   "dependencies": {
+    "@headspace/web-styles": "^4.3.6",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
