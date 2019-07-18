@@ -1,8 +1,11 @@
 {
     "version": 2,
     "name": "sharing",
-    "builds": [{ "src": "package.json", "use": "@now/static-build" }],
-    "env": {
-        "NPM_TOKEN": "@npm-token"
+    "build": {
+        "src": "package.json", 
+        "use": "@now/static-build",
+        "env": {
+            "NPM_TOKEN": "@npm-token"
+        }
     }
 }
