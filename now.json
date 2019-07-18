@@ -1,1 +1,6 @@
-{"version":2,"name":"sharing","builds":[{"src":"package.json","use":"@now/static-build"}]}
+{
+    "version": 2,
+    "name": "sharing",
+    "builds": [{ "src": "package.json", "use": "@now/static-build" }],
+    "NPM_TOKEN": "@npm-token"
+}
